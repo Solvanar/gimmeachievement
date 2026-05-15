@@ -2,7 +2,8 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAchievementsStore } from '@/stores/achievements'
-import GamingDecor from '@/components/GamingDecor.vue'
+import { ACHIEVEMENT_THEMES } from '@/constants/achievementThemes'
+import GamingDecor from '@/components/decor/GamingDecor.vue'
 
 const props = defineProps<{ id: string }>()
 const router = useRouter()
@@ -56,10 +57,9 @@ function onMouseLeave() {
 </script>
 
 <template>
-  <div v-if="achievement" class="detail-page" :class="`theme-bg-${achievement.theme}`">
-    <button class="back-btn" @click="goBack">← Назад</button>
+  <div v-if="achievement" class="detail-page" :class="`bg-${achievement.theme}`">
+    <button class="back-btn" type="button" @click="goBack">← Назад</button>
 
-    <!-- Big trophy card -->
     <div class="trophy-wrap">
       <div
         class="trophy-scene"
@@ -67,59 +67,59 @@ function onMouseLeave() {
         @mouseenter="onMouseEnter"
         @mouseleave="onMouseLeave"
       >
-      <div
-        ref="trophyRef"
-        class="trophy-card"
-        :class="`theme-${achievement.theme}`"
-        :style="{
-          transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-          transition: isHovered ? 'transform 0.08s ease' : 'transform 0.5s ease'
-        }"
-      >
-        <div class="trophy-decor" />
-
         <div
-          class="trophy-glare"
+          ref="trophyRef"
+          class="trophy-card"
+          :class="`theme-${achievement.theme}`"
           :style="{
-            background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.28) 0%, transparent 60%)`,
-            opacity: isHovered ? 1 : 0
+            transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+            transition: isHovered ? 'transform 0.08s ease' : 'transform 0.5s ease'
           }"
-        />
-
-        <div class="trophy-inner">
-          <div class="trophy-image">
-            <img v-if="achievement.imageUrl" :src="achievement.imageUrl" :alt="achievement.title" />
-            <div v-else class="trophy-placeholder">✦</div>
-          </div>
-          <div class="trophy-text">
-            <h1>{{ achievement.title }}</h1>
-            <p class="trophy-date">Получено {{ new Date(achievement.createdAt).toLocaleDateString('ru-RU') }}</p>
+        >
+          <div class="trophy-decor" />
+          <div
+            class="trophy-glare"
+            :style="{
+              background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.28) 0%, transparent 60%)`,
+              opacity: isHovered ? 1 : 0
+            }"
+          />
+          <div class="trophy-inner">
+            <div class="trophy-image">
+              <img v-if="achievement.imageUrl" :src="achievement.imageUrl" :alt="achievement.title" />
+              <div v-else class="trophy-placeholder">✦</div>
+            </div>
+            <div class="trophy-text">
+              <h1>{{ achievement.title }}</h1>
+              <p class="trophy-date">
+                Получено {{ new Date(achievement.createdAt).toLocaleDateString('ru-RU') }}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <GamingDecor v-if="achievement.theme === 'gaming'" variant="detail" />
+        <GamingDecor v-if="achievement.theme === ACHIEVEMENT_THEMES.GAMING" variant="detail" />
       </div>
     </div>
 
-    <!-- Description -->
     <div class="detail-body">
       <section class="detail-section">
         <h2>Описание</h2>
         <p>{{ achievement.description }}</p>
       </section>
 
-      <!-- Personal note -->
-      <section class="detail-section note-section">
+      <section class="detail-section">
         <div class="note-header">
           <h2>Личная заметка</h2>
-          <button v-if="!isEditing" class="edit-btn" @click="isEditing = true">Редактировать</button>
+          <button v-if="!isEditing" class="btn-ghost" type="button" @click="isEditing = true">
+            Редактировать
+          </button>
         </div>
 
-        <div v-if="!isEditing">
+        <template v-if="!isEditing">
           <p v-if="achievement.personalNote" class="note-text">{{ achievement.personalNote }}</p>
           <p v-else class="note-empty">Нет заметки. Расскажи как это было?</p>
-        </div>
+        </template>
 
         <div v-else class="note-edit">
           <textarea
@@ -129,8 +129,8 @@ function onMouseLeave() {
             autofocus
           />
           <div class="note-actions">
-            <button class="save-btn" @click="saveNote">Сохранить</button>
-            <button class="cancel-btn" @click="isEditing = false">Отмена</button>
+            <button class="btn-ghost btn-primary" type="button" @click="saveNote">Сохранить</button>
+            <button class="btn-ghost btn-danger" type="button" @click="isEditing = false">Отмена</button>
           </div>
         </div>
       </section>
@@ -138,8 +138,8 @@ function onMouseLeave() {
   </div>
 
   <div v-else class="not-found">
-    <p>Такой ачивки нет 🤷</p>
-    <button @click="goBack">Вернуться</button>
+    <p>Такой ачивки нет</p>
+    <button class="btn-ghost" type="button" @click="goBack">Вернуться</button>
   </div>
 </template>
 
@@ -147,46 +147,35 @@ function onMouseLeave() {
 .detail-page {
   min-height: 100vh;
   padding: 32px 24px 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  row-gap: 40px;
   transition: background 0.4s ease;
 }
 
-/* Theme backgrounds */
-.theme-bg-gaming {
-  background: radial-gradient(ellipse at 50% 0%, rgba(108, 99, 255, 0.15) 0%, transparent 60%),
-              #0d0d1a;
-}
-.theme-bg-cooking {
-  background: radial-gradient(ellipse at 50% 0%, rgba(139, 90, 43, 0.2) 0%, transparent 60%),
-              #1a0f07;
-}
-.theme-bg-default {
-  background: #0d0d1a;
-}
+/* Theme-tinted page backgrounds */
+.bg-gaming  { background: var(--gaming-page-aura), var(--page-bg); }
+.bg-cooking { background: var(--cooking-page-aura), var(--cooking-page-bg); }
+.bg-default { background: var(--page-bg); }
 
 .back-btn {
-  align-self: flex-start;
+  justify-self: start;
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
   font-size: 0.9rem;
   cursor: pointer;
-  padding: 0;
-  margin-bottom: 48px;
   transition: color 0.2s;
 }
-.back-btn:hover { color: #fff; }
+.back-btn:hover { color: var(--text-primary); }
 
-/* ── Big trophy card ── */
+/* ── Trophy card ── */
 .trophy-wrap {
   width: 100%;
-  max-width: 560px;
-  margin-bottom: 48px;
-  /* extra right padding so PS buttons don't get clipped */
-  padding-right: 60px;
+  max-width: 620px;
   padding-top: 40px;
+  padding-right: 60px;
 }
 
 .trophy-scene {
@@ -201,7 +190,7 @@ function onMouseLeave() {
   height: 100%;
   border-radius: 100px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow-trophy);
 }
 
 .trophy-glare {
@@ -209,27 +198,30 @@ function onMouseLeave() {
   inset: 0;
   z-index: 10;
   pointer-events: none;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.04) 100%
-  );
+  border-radius: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.trophy-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
   border-radius: inherit;
 }
 
 .trophy-inner {
   position: relative;
   z-index: 5;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  gap: 24px;
+  column-gap: 24px;
   height: 100%;
   padding: 0 40px 0 32px;
 }
 
 .trophy-image {
-  flex-shrink: 0;
   width: 130px;
   height: 130px;
   border-radius: 50%;
@@ -238,12 +230,7 @@ function onMouseLeave() {
   align-items: center;
   justify-content: center;
 }
-
-.trophy-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.trophy-image img { width: 100%; height: 100%; object-fit: cover; }
 
 .trophy-placeholder {
   width: 100%;
@@ -252,6 +239,7 @@ function onMouseLeave() {
   align-items: center;
   justify-content: center;
   font-size: 3.5rem;
+  border-radius: 50%;
 }
 
 .trophy-text h1 {
@@ -264,88 +252,68 @@ function onMouseLeave() {
 .trophy-date {
   margin: 0;
   font-size: 0.85rem;
-  opacity: 0.55;
+  opacity: 0.65;
   letter-spacing: 0.04em;
 }
 
-/* Gaming theme for big card */
+/* Trophy theme: gaming */
 .trophy-card.theme-gaming {
-  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 50%, #1a1a2e 100%);
-  border: 1px solid rgba(108, 99, 255, 0.5);
-  color: #e8e8f0;
+  background: var(--gaming-card-bg);
+  border: 1px solid var(--gaming-card-border);
+  color: var(--gaming-card-text);
 }
 .trophy-card.theme-gaming .trophy-placeholder {
-  background: radial-gradient(circle, #2d2d5e, #1a1a2e);
-  color: #6c63ff;
-  border: 2px solid rgba(108, 99, 255, 0.5);
-  border-radius: 50%;
+  background: var(--gaming-image-bg);
+  color: var(--gaming-image-icon);
+  border: 2px solid var(--gaming-image-border);
 }
 .trophy-card.theme-gaming .trophy-text h1 {
-  color: #a8a4ff;
-  text-shadow: 0 0 20px rgba(108, 99, 255, 0.5);
+  color: var(--gaming-card-title);
+  text-shadow: 0 0 20px var(--gaming-card-title-glow);
 }
 .trophy-card.theme-gaming .trophy-decor {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  border-radius: inherit;
-  background-image:
-    radial-gradient(circle 28px at 90% 25%, transparent 22px, rgba(108,99,255,0.15) 22px, rgba(108,99,255,0.15) 28px, transparent 28px),
-    radial-gradient(circle 20px at 94% 70%, transparent 15px, rgba(255,99,132,0.1) 15px, rgba(255,99,132,0.1) 20px, transparent 20px),
-    radial-gradient(circle 14px at 84% 82%, transparent 10px, rgba(99,255,180,0.1) 10px, rgba(99,255,180,0.1) 14px, transparent 14px),
-    radial-gradient(circle 22px at 86% 15%, transparent 17px, rgba(255,220,50,0.08) 17px, rgba(255,220,50,0.08) 22px, transparent 22px);
+  background: var(--gaming-decor-overlay);
 }
 
-/* Cooking theme for big card */
+/* Trophy theme: cooking */
 .trophy-card.theme-cooking {
-  background:
-    repeating-linear-gradient(90deg, rgba(139,90,43,0.15) 0px, transparent 2px, transparent 18px),
-    repeating-linear-gradient(0deg, rgba(139,90,43,0.08) 0px, transparent 2px, transparent 18px),
-    linear-gradient(135deg, #8B5E3C 0%, #A0714F 30%, #8B5E3C 60%, #7A4F2D 100%);
-  border: 2px solid #5c3a1e;
-  color: #f5e6d0;
+  background: var(--cooking-card-bg);
+  border: 2px solid var(--cooking-card-border);
+  color: var(--cooking-card-text);
 }
 .trophy-card.theme-cooking .trophy-placeholder {
-  background: radial-gradient(circle, #6b4423, #4a2e15);
-  color: #f5c882;
-  border: 2px solid rgba(139,90,43,0.6);
-  border-radius: 50%;
+  background: var(--cooking-image-bg);
+  color: var(--cooking-image-icon);
+  border: 2px solid var(--cooking-image-border);
 }
 .trophy-card.theme-cooking .trophy-text h1 {
-  color: #f5c882;
+  color: var(--cooking-card-title);
   font-family: Georgia, serif;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+  text-shadow: var(--cooking-card-title-shadow);
 }
 .trophy-card.theme-cooking .trophy-decor {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  border-radius: inherit;
-  box-shadow: inset 0 0 30px rgba(0,0,0,0.3), inset 0 2px 0 rgba(255,220,160,0.3);
+  box-shadow: var(--cooking-card-inset);
 }
 
-/* Default theme */
+/* Trophy theme: default */
 .trophy-card.theme-default {
-  background: linear-gradient(135deg, #1e1e2e, #2a2a3e);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: #e0e0e8;
+  background: var(--default-card-bg);
+  border: 1px solid var(--default-card-border);
+  color: var(--default-card-text);
 }
 .trophy-card.theme-default .trophy-placeholder {
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.3);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 50%;
+  background: var(--default-image-bg);
+  color: var(--default-image-icon);
+  border: 1px solid var(--default-image-border);
 }
 
-/* ── Body sections ── */
+/* ── Body / sections ── */
 .detail-body {
   width: 100%;
-  max-width: 560px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  max-width: 620px;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 32px;
 }
 
 .detail-section h2 {
@@ -353,52 +321,52 @@ function onMouseLeave() {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   margin: 0 0 12px;
 }
 
 .detail-section p {
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--text-secondary);
   line-height: 1.7;
   margin: 0;
   font-size: 1rem;
 }
 
 .note-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  justify-content: space-between;
+  column-gap: 12px;
   margin-bottom: 12px;
 }
 .note-header h2 { margin: 0; }
 
 .note-text {
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--text-secondary);
   line-height: 1.7;
   font-style: italic;
 }
 
 .note-empty {
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--text-subtle);
   font-style: italic;
 }
 
 .note-edit textarea {
   width: 100%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 12px;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 0.95rem;
   line-height: 1.6;
   padding: 12px 16px;
   resize: vertical;
   font-family: inherit;
-  box-sizing: border-box;
 }
 .note-edit textarea:focus {
   outline: none;
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--input-border-focus);
 }
 
 .note-actions {
@@ -407,28 +375,58 @@ function onMouseLeave() {
   margin-top: 10px;
 }
 
-.edit-btn, .save-btn, .cancel-btn {
+.btn-ghost {
   background: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--btn-border);
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--btn-text);
   font-size: 0.85rem;
   padding: 6px 14px;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
-.edit-btn:hover, .save-btn:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
-.save-btn { border-color: rgba(108, 99, 255, 0.5); color: #a8a4ff; }
-.save-btn:hover { background: rgba(108, 99, 255, 0.15); }
-.cancel-btn:hover { border-color: rgba(255,80,80,0.4); color: rgba(255,120,120,0.9); }
+.btn-ghost:hover {
+  border-color: var(--btn-border-hover);
+  color: var(--btn-text-hover);
+}
+
+.btn-primary {
+  border-color: var(--btn-primary-border);
+  color: var(--btn-primary-text);
+}
+.btn-primary:hover {
+  border-color: var(--btn-primary-border);
+  color: var(--btn-primary-text);
+  background: var(--btn-primary-bg-hover);
+}
+
+.btn-danger:hover {
+  border-color: var(--btn-danger-border);
+  color: var(--btn-danger-text);
+}
 
 .not-found {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-content: center;
   min-height: 100vh;
   gap: 16px;
-  color: rgba(255,255,255,0.5);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .detail-page { padding: 24px 16px 60px; }
+
+  .trophy-wrap {
+    padding-right: 0;
+    padding-top: 32px;
+  }
+
+  .trophy-scene {
+    height: auto;
+    transform: scale(0.85);
+    transform-origin: center top;
+  }
 }
 </style>

@@ -1,4 +1,6 @@
-export type AchievementTheme = 'gaming' | 'cooking' | 'default'
+import type { AchievementTheme } from '@/constants/achievementThemes'
+
+export type { AchievementTheme }
 
 export interface Achievement {
   id: string

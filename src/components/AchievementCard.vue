@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import type { Achievement } from '@/types/achievement'
-import GamingDecor from '@/components/GamingDecor.vue'
+import { ACHIEVEMENT_THEMES } from '@/constants/achievementThemes'
+import GamingDecor from '@/components/decor/GamingDecor.vue'
 
 const props = defineProps<{ achievement: Achievement }>()
 const router = useRouter()
@@ -28,7 +29,7 @@ function onClick() {
         </div>
       </div>
 
-      <GamingDecor v-if="achievement.theme === 'gaming'" variant="card" />
+      <GamingDecor v-if="achievement.theme === ACHIEVEMENT_THEMES.GAMING" variant="card" />
     </div>
   </div>
 </template>
@@ -38,7 +39,7 @@ function onClick() {
   cursor: pointer;
   display: flex;
   justify-content: center;
-  padding: 30px 50px 30px 0;
+  width: 100%;
 }
 
 .card-scene {
@@ -50,20 +51,19 @@ function onClick() {
 
 .card {
   position: relative;
-  width: 320px;
-  height: 130px;
+  width: 100%;
+  height: 100%;
   border-radius: 65px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-card);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
   transform: scale(1.03);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow-card-hover);
 }
 
-/* ── Content layout ── */
 .card-content {
   position: relative;
   z-index: 5;
@@ -114,70 +114,64 @@ function onClick() {
   overflow: hidden;
 }
 
-/* ══ THEME: gaming ══ */
-.theme-gaming {
-  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 50%, #1a1a2e 100%);
-  border: 1px solid rgba(108, 99, 255, 0.4);
-  color: #e8e8f0;
-}
-.theme-gaming .card-image-placeholder {
-  background: radial-gradient(circle, #2d2d5e, #1a1a2e);
-  color: #6c63ff;
-  border: 2px solid rgba(108, 99, 255, 0.5);
-}
-.theme-gaming .card-text h3 {
-  color: #a8a4ff;
-  text-shadow: 0 0 12px rgba(108, 99, 255, 0.6);
-}
-.theme-gaming .theme-decor {
+.theme-decor {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 1;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(108,99,255,0.05) 0%, transparent 60%);
+}
+
+/* ══ THEME: gaming ══ */
+.theme-gaming {
+  background: var(--gaming-card-bg);
+  border: 1px solid var(--gaming-card-border);
+  color: var(--gaming-card-text);
+}
+.theme-gaming .card-image-placeholder {
+  background: var(--gaming-image-bg);
+  color: var(--gaming-image-icon);
+  border: 2px solid var(--gaming-image-border);
+}
+.theme-gaming .card-text h3 {
+  color: var(--gaming-card-title);
+  text-shadow: 0 0 12px var(--gaming-card-title-glow);
+}
+.theme-gaming .theme-decor {
+  background: var(--gaming-decor-overlay);
 }
 
 /* ══ THEME: cooking ══ */
 .theme-cooking {
-  background:
-    repeating-linear-gradient(90deg, rgba(139,90,43,0.15) 0px, transparent 2px, transparent 18px),
-    repeating-linear-gradient(0deg, rgba(139,90,43,0.08) 0px, transparent 2px, transparent 18px),
-    linear-gradient(135deg, #8B5E3C 0%, #A0714F 30%, #8B5E3C 60%, #7A4F2D 100%);
-  border: 2px solid #5c3a1e;
-  box-shadow: 0 8px 32px rgba(92,58,30,0.5), inset 0 1px 0 rgba(255,220,160,0.2);
-  color: #f5e6d0;
+  background: var(--cooking-card-bg);
+  border: 2px solid var(--cooking-card-border);
+  color: var(--cooking-card-text);
 }
 .theme-cooking .card-image-placeholder {
-  background: radial-gradient(circle, #6b4423, #4a2e15);
-  color: #f5c882;
-  border: 2px solid rgba(139,90,43,0.6);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+  background: var(--cooking-image-bg);
+  color: var(--cooking-image-icon);
+  border: 2px solid var(--cooking-image-border);
+  box-shadow: var(--cooking-image-shadow);
 }
 .theme-cooking .card-text h3 {
-  color: #f5c882;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  color: var(--cooking-card-title);
+  text-shadow: var(--cooking-card-title-shadow);
   font-family: Georgia, serif;
 }
-.theme-cooking .card-text p { color: #e8d5b8; }
+.theme-cooking .card-text p { color: var(--cooking-card-text-secondary); }
 .theme-cooking .theme-decor {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  border-radius: inherit;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,220,160,0.3);
+  box-shadow: var(--cooking-card-inset);
 }
 
 /* ══ THEME: default ══ */
 .theme-default {
-  background: linear-gradient(135deg, #1e1e2e, #2a2a3e);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: #e0e0e8;
+  background: var(--default-card-bg);
+  border: 1px solid var(--default-card-border);
+  color: var(--default-card-text);
 }
 .theme-default .card-image-placeholder {
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.4);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--default-image-bg);
+  color: var(--default-image-icon);
+  border: 1px solid var(--default-image-border);
 }
 </style>

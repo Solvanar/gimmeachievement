@@ -1,0 +1,88 @@
+[data-theme='light'] {
+  /* ── Page / surface ── */
+  --page-bg: #f5f4fa;
+  --surface-elevated: #ffffff;
+  --surface-elevated-border: rgba(26, 26, 46, 0.08);
+
+  /* ── Text ── */
+  --text-primary: #1a1a2e;
+  --text-secondary: rgba(26, 26, 46, 0.75);
+  --text-muted: rgba(26, 26, 46, 0.55);
+  --text-subtle: rgba(26, 26, 46, 0.3);
+  --text-error: #d62828;
+
+  /* ── Hero heading gradient ── */
+  --hero-text-from: #1a1a2e;
+  --hero-text-to: rgba(26, 26, 46, 0.6);
+
+  /* ── Inputs ── */
+  --input-bg: #ffffff;
+  --input-border: rgba(26, 26, 46, 0.15);
+  --input-border-focus: rgba(108, 99, 255, 0.55);
+
+  /* ── Buttons ── */
+  --btn-border: rgba(26, 26, 46, 0.2);
+  --btn-text: rgba(26, 26, 46, 0.75);
+  --btn-border-hover: rgba(26, 26, 46, 0.55);
+  --btn-text-hover: #1a1a2e;
+  --btn-primary-border: rgba(108, 99, 255, 0.55);
+  --btn-primary-text: #4a44c4;
+  --btn-primary-bg-hover: rgba(108, 99, 255, 0.1);
+  --btn-danger-border: rgba(214, 40, 40, 0.4);
+  --btn-danger-text: #c02525;
+
+  /* ── Shadows ── */
+  --shadow-card: 0 8px 28px rgba(108, 99, 255, 0.12);
+  --shadow-card-hover: 0 16px 42px rgba(108, 99, 255, 0.22);
+  --shadow-trophy: 0 20px 56px rgba(108, 99, 255, 0.25);
+
+  /* ════════════════════════════════════════
+     Achievement theme: GAMING (light)
+  ════════════════════════════════════════ */
+  --gaming-card-bg: linear-gradient(135deg, #e8e6ff 0%, #d4d1ff 50%, #c5c2f5 100%);
+  --gaming-card-border: rgba(108, 99, 255, 0.5);
+  --gaming-card-text: #2d2d44;
+  --gaming-card-title: #4a44c4;
+  --gaming-card-title-glow: rgba(108, 99, 255, 0.35);
+  --gaming-image-bg: radial-gradient(circle, #c5c2f5, #a8a4ff);
+  --gaming-image-icon: #4a44c4;
+  --gaming-image-border: rgba(108, 99, 255, 0.6);
+  --gaming-decor-overlay: linear-gradient(135deg, rgba(108, 99, 255, 0.08) 0%, transparent 60%);
+  --gaming-page-aura: radial-gradient(ellipse at 50% 0%, rgba(108, 99, 255, 0.22) 0%, transparent 60%);
+  --gaming-cord-base: #4a44c4;
+  --gaming-cord-highlight: #a8a4ff;
+  --gaming-cord-stripes: rgba(255, 255, 255, 0.5);
+  --gaming-ps-btn-bg: rgba(255, 255, 255, 0.92);
+
+  /* ════════════════════════════════════════
+     Achievement theme: COOKING (light)
+  ════════════════════════════════════════ */
+  --cooking-card-bg:
+    repeating-linear-gradient(90deg, rgba(92, 58, 30, 0.12) 0, transparent 2px, transparent 18px),
+    repeating-linear-gradient(0deg, rgba(92, 58, 30, 0.06) 0, transparent 2px, transparent 18px),
+    linear-gradient(135deg, #e8c298 0%, #d4a574 30%, #e8c298 60%, #c9924f 100%);
+  --cooking-card-border: #8b5e3c;
+  --cooking-card-text: #4a2e15;
+  --cooking-card-text-secondary: #6b4423;
+  --cooking-card-title: #5c3a1e;
+  --cooking-card-title-shadow: 1px 1px 1px rgba(255, 240, 200, 0.6);
+  --cooking-card-inset:
+    inset 0 0 20px rgba(92, 58, 30, 0.15),
+    inset 0 1px 0 rgba(255, 250, 230, 0.6);
+  --cooking-image-bg: radial-gradient(circle, #e8c298, #c9924f);
+  --cooking-image-icon: #5c3a1e;
+  --cooking-image-border: rgba(139, 90, 43, 0.5);
+  --cooking-image-shadow: inset 0 2px 4px rgba(92, 58, 30, 0.25);
+  --cooking-page-aura: radial-gradient(ellipse at 50% 0%, rgba(212, 165, 116, 0.4) 0%, transparent 60%);
+  --cooking-page-bg: #faf0e0;
+
+  /* ════════════════════════════════════════
+     Achievement theme: DEFAULT (light)
+  ════════════════════════════════════════ */
+  --default-card-bg: linear-gradient(135deg, #ffffff, #ececf5);
+  --default-card-border: rgba(26, 26, 46, 0.1);
+  --default-card-text: #1a1a2e;
+  --default-image-bg: rgba(26, 26, 46, 0.05);
+  --default-image-icon: rgba(26, 26, 46, 0.4);
+  --default-image-border: rgba(26, 26, 46, 0.1);
+}
