@@ -1,0 +1,8 @@
+node_modules
+dist
+backend
+postgres_data
+package-lock.json
+*.log
+.idea
+.vscode

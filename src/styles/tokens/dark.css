@@ -1,88 +1,114 @@
 [data-theme='dark'] {
-  /* ── Page / surface ── */
-  --page-bg: #0d0d1a;
-  --surface-elevated: rgba(255, 255, 255, 0.04);
-  --surface-elevated-border: rgba(255, 255, 255, 0.1);
+	/* ── Page / surface ── */
+	--page-bg: #0d0d1a;
+	--surface-elevated: rgba(255, 255, 255, 0.04);
+	--surface-elevated-border: rgba(255, 255, 255, 0.1);
 
-  /* ── Text ── */
-  --text-primary: #e0e0e8;
-  --text-secondary: rgba(255, 255, 255, 0.75);
-  --text-muted: rgba(255, 255, 255, 0.5);
-  --text-subtle: rgba(255, 255, 255, 0.25);
-  --text-error: #ff6b6b;
+	/* ── Text ── */
+	--text-primary: #e0e0e8;
+	--text-secondary: rgba(255, 255, 255, 0.75);
+	--text-muted: rgba(255, 255, 255, 0.5);
+	--text-subtle: rgba(255, 255, 255, 0.25);
+	--text-error: #ff6b6b;
 
-  /* ── Hero heading gradient ── */
-  --hero-text-from: #ffffff;
-  --hero-text-to: rgba(255, 255, 255, 0.6);
+	/* ── Hero heading gradient ── */
+	--hero-text-from: #ffffff;
+	--hero-text-to: rgba(255, 255, 255, 0.6);
 
-  /* ── Inputs ── */
-  --input-bg: rgba(255, 255, 255, 0.06);
-  --input-border: rgba(255, 255, 255, 0.12);
-  --input-border-focus: rgba(255, 255, 255, 0.3);
+	/* ── Inputs ── */
+	--input-bg: rgba(255, 255, 255, 0.06);
+	--input-border: rgba(255, 255, 255, 0.12);
+	--input-border-focus: rgba(255, 255, 255, 0.3);
 
-  /* ── Buttons (ghost / outline style) ── */
-  --btn-border: rgba(255, 255, 255, 0.2);
-  --btn-text: rgba(255, 255, 255, 0.7);
-  --btn-border-hover: rgba(255, 255, 255, 0.5);
-  --btn-text-hover: #ffffff;
-  --btn-primary-border: rgba(108, 99, 255, 0.5);
-  --btn-primary-text: #a8a4ff;
-  --btn-primary-bg-hover: rgba(108, 99, 255, 0.15);
-  --btn-danger-border: rgba(255, 80, 80, 0.4);
-  --btn-danger-text: rgba(255, 120, 120, 0.9);
+	/* ── Buttons (ghost / outline style) ── */
+	--btn-border: rgba(255, 255, 255, 0.2);
+	--btn-text: rgba(255, 255, 255, 0.7);
+	--btn-border-hover: rgba(255, 255, 255, 0.5);
+	--btn-text-hover: #ffffff;
+	--btn-primary-border: rgba(108, 99, 255, 0.5);
+	--btn-primary-text: #a8a4ff;
+	--btn-primary-bg-hover: rgba(108, 99, 255, 0.15);
+	--btn-danger-border: rgba(255, 80, 80, 0.4);
+	--btn-danger-text: rgba(255, 120, 120, 0.9);
 
-  /* ── Shadows ── */
-  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --shadow-card-hover: 0 16px 48px rgba(0, 0, 0, 0.6);
-  --shadow-trophy: 0 20px 60px rgba(0, 0, 0, 0.6);
+	/* ── Shadows ── */
+	--shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+	--shadow-card-hover: 0 16px 48px rgba(0, 0, 0, 0.6);
+	--shadow-trophy: 0 20px 60px rgba(0, 0, 0, 0.6);
 
-  /* ════════════════════════════════════════
+	/* ════════════════════════════════════════
      Achievement theme: GAMING
   ════════════════════════════════════════ */
-  --gaming-card-bg: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 50%, #1a1a2e 100%);
-  --gaming-card-border: rgba(108, 99, 255, 0.4);
-  --gaming-card-text: #e8e8f0;
-  --gaming-card-title: #a8a4ff;
-  --gaming-card-title-glow: rgba(108, 99, 255, 0.6);
-  --gaming-image-bg: radial-gradient(circle, #2d2d5e, #1a1a2e);
-  --gaming-image-icon: #6c63ff;
-  --gaming-image-border: rgba(108, 99, 255, 0.5);
-  --gaming-decor-overlay: linear-gradient(135deg, rgba(108, 99, 255, 0.05) 0%, transparent 60%);
-  --gaming-page-aura: radial-gradient(ellipse at 50% 0%, rgba(108, 99, 255, 0.15) 0%, transparent 60%);
-  --gaming-cord-base: #12122a;
-  --gaming-cord-highlight: #3a3a6e;
-  --gaming-cord-stripes: rgba(255, 255, 255, 0.06);
-  --gaming-ps-btn-bg: rgba(8, 8, 24, 0.75);
+	--gaming-card-bg: linear-gradient(
+		135deg,
+		#1a1a2e 0%,
+		#2d2d44 50%,
+		#1a1a2e 100%
+	);
+	--gaming-card-border: rgba(108, 99, 255, 0.4);
+	--gaming-card-text: #e8e8f0;
+	--gaming-card-title: #a8a4ff;
+	--gaming-card-title-glow: rgba(108, 99, 255, 0.6);
+	--gaming-image-bg: radial-gradient(circle, #2d2d5e, #1a1a2e);
+	--gaming-image-icon: #6c63ff;
+	--gaming-image-border: rgba(108, 99, 255, 0.5);
+	--gaming-decor-overlay: linear-gradient(
+		135deg,
+		rgba(108, 99, 255, 0.05) 0%,
+		transparent 60%
+	);
+	--gaming-page-aura: radial-gradient(
+		ellipse at 50% 0%,
+		rgba(108, 99, 255, 0.15) 0%,
+		transparent 60%
+	);
+	--gaming-cord-base: #12122a;
+	--gaming-cord-highlight: #3a3a6e;
+	--gaming-cord-stripes: rgba(255, 255, 255, 0.06);
+	--gaming-ps-btn-bg: rgba(8, 8, 24, 0.75);
 
-  /* ════════════════════════════════════════
+	/* ════════════════════════════════════════
      Achievement theme: COOKING
   ════════════════════════════════════════ */
-  --cooking-card-bg:
-    repeating-linear-gradient(90deg, rgba(139, 90, 43, 0.15) 0, transparent 2px, transparent 18px),
-    repeating-linear-gradient(0deg, rgba(139, 90, 43, 0.08) 0, transparent 2px, transparent 18px),
-    linear-gradient(135deg, #8b5e3c 0%, #a0714f 30%, #8b5e3c 60%, #7a4f2d 100%);
-  --cooking-card-border: #5c3a1e;
-  --cooking-card-text: #f5e6d0;
-  --cooking-card-text-secondary: #e8d5b8;
-  --cooking-card-title: #f5c882;
-  --cooking-card-title-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-  --cooking-card-inset:
-    inset 0 0 20px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 220, 160, 0.3);
-  --cooking-image-bg: radial-gradient(circle, #6b4423, #4a2e15);
-  --cooking-image-icon: #f5c882;
-  --cooking-image-border: rgba(139, 90, 43, 0.6);
-  --cooking-image-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
-  --cooking-page-aura: radial-gradient(ellipse at 50% 0%, rgba(139, 90, 43, 0.2) 0%, transparent 60%);
-  --cooking-page-bg: #1a0f07;
+	--cooking-card-bg:
+		repeating-linear-gradient(
+			90deg,
+			rgba(139, 90, 43, 0.15) 0,
+			transparent 2px,
+			transparent 18px
+		),
+		repeating-linear-gradient(
+			0deg,
+			rgba(139, 90, 43, 0.08) 0,
+			transparent 2px,
+			transparent 18px
+		),
+		linear-gradient(135deg, #8b5e3c 0%, #a0714f 30%, #8b5e3c 60%, #7a4f2d 100%);
+	--cooking-card-border: #5c3a1e;
+	--cooking-card-text: #f5e6d0;
+	--cooking-card-text-secondary: #e8d5b8;
+	--cooking-card-title: #f5c882;
+	--cooking-card-title-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+	--cooking-card-inset:
+		inset 0 0 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 220, 160, 0.3);
+	--cooking-image-bg: radial-gradient(circle, #6b4423, #4a2e15);
+	--cooking-image-icon: #f5c882;
+	--cooking-image-border: rgba(139, 90, 43, 0.6);
+	--cooking-image-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+	--cooking-page-aura: radial-gradient(
+		ellipse at 50% 0%,
+		rgba(139, 90, 43, 0.2) 0%,
+		transparent 60%
+	);
+	--cooking-page-bg: #1a0f07;
 
-  /* ════════════════════════════════════════
+	/* ════════════════════════════════════════
      Achievement theme: DEFAULT
   ════════════════════════════════════════ */
-  --default-card-bg: linear-gradient(135deg, #1e1e2e, #2a2a3e);
-  --default-card-border: rgba(255, 255, 255, 0.1);
-  --default-card-text: #e0e0e8;
-  --default-image-bg: rgba(255, 255, 255, 0.05);
-  --default-image-icon: rgba(255, 255, 255, 0.4);
-  --default-image-border: rgba(255, 255, 255, 0.1);
+	--default-card-bg: linear-gradient(135deg, #1e1e2e, #2a2a3e);
+	--default-card-border: rgba(255, 255, 255, 0.1);
+	--default-card-text: #e0e0e8;
+	--default-image-bg: rgba(255, 255, 255, 0.05);
+	--default-image-icon: rgba(255, 255, 255, 0.4);
+	--default-image-border: rgba(255, 255, 255, 0.1);
 }

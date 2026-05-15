@@ -1,13 +1,13 @@
-import type { AchievementTheme } from '@/constants/achievementThemes'
+import type { AchievementTheme } from '@/constants/achievementThemes';
 
-export type { AchievementTheme }
+export type { AchievementTheme };
 
 export interface Achievement {
-  id: string
-  title: string
-  description: string
-  theme: AchievementTheme
-  imageUrl?: string
-  personalNote?: string
-  createdAt: string
+	id: string;
+	title: string;
+	description: string;
+	theme: AchievementTheme;
+	imageUrl?: string;
+	personalNote?: string;
+	createdAt: string;
 }
