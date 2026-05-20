@@ -1,11 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import AchievementList from '@/views/AchievementList.vue';
-import AchievementDetail from '@/views/AchievementDetail.vue';
+import Catalog from '@/layouts/Catalog.vue';
+import Achievement from '@/layouts/Achievement.vue';
+import Profile from '@/layouts/Profile.vue';
 
 export default createRouter({
 	history: createWebHistory(),
 	routes: [
-		{ path: '/', component: AchievementList },
-		{ path: '/achievement/:id', component: AchievementDetail, props: true },
+		{ path: '/', redirect: '/catalog' },
+		{ path: '/catalog', component: Catalog },
+		{ path: '/profile', component: Profile },
+		{ path: '/achievement/:id', component: Achievement, props: true },
 	],
 });

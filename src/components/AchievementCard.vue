@@ -52,7 +52,7 @@ function onClick() {
 .card-scene {
 	position: relative;
 	width: 320px;
-	height: 130px;
+	height: 110px;
 	flex-shrink: 0;
 }
 
@@ -60,16 +60,13 @@ function onClick() {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	border-radius: 65px;
+	border-radius: 55px;
 	overflow: hidden;
 	box-shadow: var(--shadow-card);
-	transition:
-		transform 0.2s ease,
-		box-shadow 0.2s ease;
+	transition: box-shadow 0.2s ease;
 }
 
 .card:hover {
-	transform: scale(1.03);
 	box-shadow: var(--shadow-card-hover);
 }
 
@@ -78,15 +75,15 @@ function onClick() {
 	z-index: 5;
 	display: flex;
 	align-items: center;
-	gap: 16px;
+	gap: 14px;
 	height: 100%;
-	padding: 0 24px 0 20px;
+	padding: 0 22px 0 16px;
 }
 
 .card-image-slot {
 	flex-shrink: 0;
-	width: 86px;
-	height: 86px;
+	width: 74px;
+	height: 74px;
 	border-radius: 50%;
 	overflow: hidden;
 	display: flex;
@@ -106,19 +103,19 @@ function onClick() {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 2rem;
+	font-size: 1.75rem;
 }
 
 .card-text h3 {
-	margin: 0 0 6px;
-	font-size: 1rem;
+	margin: 0 0 4px;
+	font-size: 0.95rem;
 	font-weight: 700;
 	line-height: 1.2;
 }
 
 .card-text p {
 	margin: 0;
-	font-size: 0.78rem;
+	font-size: 0.75rem;
 	line-height: 1.4;
 	opacity: 0.8;
 	display: -webkit-box;

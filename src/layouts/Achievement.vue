@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import { useAchievementsStore } from '@/stores/achievements';
 import { ACHIEVEMENT_THEMES } from '@/constants/achievementThemes';
 import GamingDecor from '@/components/decor/GamingDecor.vue';
+import Button from '@/components/ui/Button.vue';
 
 const props = defineProps<{ id: string }>();
 const router = useRouter();
@@ -22,7 +23,7 @@ function saveNote() {
 }
 
 function goBack() {
-	router.push('/');
+	router.push('/catalog');
 }
 
 // Tilt + holographic glare
@@ -64,7 +65,9 @@ function onMouseLeave() {
 		class="detail-page"
 		:class="`bg-${achievement.theme}`"
 	>
-		<button class="back-btn" type="button" @click="goBack">← Назад</button>
+		<Button class="back-btn" variant="ghost" size="sm" @click="goBack">
+			← В каталог
+		</Button>
 
 		<div class="trophy-wrap">
 			<div
@@ -129,14 +132,14 @@ function onMouseLeave() {
 			<section class="detail-section">
 				<div class="note-header">
 					<h2>Личная заметка</h2>
-					<button
+					<Button
 						v-if="!isEditing"
-						class="btn-ghost"
-						type="button"
+						variant="outline"
+						size="sm"
 						@click="isEditing = true"
 					>
 						Редактировать
-					</button>
+					</Button>
 				</div>
 
 				<template v-if="!isEditing">
@@ -154,20 +157,12 @@ function onMouseLeave() {
 						autofocus
 					/>
 					<div class="note-actions">
-						<button
-							class="btn-ghost btn-primary"
-							type="button"
-							@click="saveNote"
-						>
+						<Button variant="primary" size="sm" @click="saveNote">
 							Сохранить
-						</button>
-						<button
-							class="btn-ghost btn-danger"
-							type="button"
-							@click="isEditing = false"
-						>
+						</Button>
+						<Button variant="danger" size="sm" @click="isEditing = false">
 							Отмена
-						</button>
+						</Button>
 					</div>
 				</div>
 			</section>
@@ -176,7 +171,7 @@ function onMouseLeave() {
 
 	<div v-else class="not-found">
 		<p>Такой ачивки нет</p>
-		<button class="btn-ghost" type="button" @click="goBack">Вернуться</button>
+		<Button variant="outline" size="sm" @click="goBack">Вернуться</Button>
 	</div>
 </template>
 
@@ -202,17 +197,9 @@ function onMouseLeave() {
 	background: var(--page-bg);
 }
 
+/* Back button needs to be anchored to the left of the grid cell */
 .back-btn {
 	justify-self: start;
-	background: none;
-	border: none;
-	color: var(--text-muted);
-	font-size: 0.9rem;
-	cursor: pointer;
-	transition: color 0.2s;
-}
-.back-btn:hover {
-	color: var(--text-primary);
 }
 
 /* ── Trophy card ── */
@@ -424,39 +411,6 @@ function onMouseLeave() {
 	display: flex;
 	gap: 10px;
 	margin-top: 10px;
-}
-
-.btn-ghost {
-	background: none;
-	border: 1px solid var(--btn-border);
-	border-radius: 8px;
-	color: var(--btn-text);
-	font-size: 0.85rem;
-	padding: 6px 14px;
-	cursor: pointer;
-	transition:
-		border-color 0.15s,
-		color 0.15s,
-		background 0.15s;
-}
-.btn-ghost:hover {
-	border-color: var(--btn-border-hover);
-	color: var(--btn-text-hover);
-}
-
-.btn-primary {
-	border-color: var(--btn-primary-border);
-	color: var(--btn-primary-text);
-}
-.btn-primary:hover {
-	border-color: var(--btn-primary-border);
-	color: var(--btn-primary-text);
-	background: var(--btn-primary-bg-hover);
-}
-
-.btn-danger:hover {
-	border-color: var(--btn-danger-border);
-	color: var(--btn-danger-text);
 }
 
 .not-found {
