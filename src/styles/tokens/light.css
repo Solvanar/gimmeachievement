@@ -10,6 +10,13 @@
 	--text-muted: rgba(26, 26, 46, 0.55);
 	--text-subtle: rgba(26, 26, 46, 0.3);
 	--text-error: #d62828;
+	--text-success: #2ea043;
+
+	/* ── Notification colors ── */
+	--notifier-bg: rgba(255, 255, 255, 0.96);
+	--notifier-info-border: rgba(108, 99, 255, 0.5);
+	--notifier-success-border: rgba(46, 160, 67, 0.45);
+	--notifier-error-border: rgba(214, 40, 40, 0.45);
 
 	/* ── Hero heading gradient ── */
 	--hero-text-from: #1a1a2e;
