@@ -91,7 +91,7 @@ const {
 	font-size: 0.95rem;
 }
 
-/* ── Variants ── */
+/* ── Styles ── */
 .variant-primary {
 	background: var(--text-primary);
 	color: var(--page-bg);

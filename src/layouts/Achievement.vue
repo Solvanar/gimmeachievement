@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 import { useAchievementsStore } from '@/stores/achievements';
 import { ACHIEVEMENT_THEMES } from '@/constants/achievementThemes';
 import GamingDecor from '@/components/decor/GamingDecor.vue';
-import Button from '@/components/ui/Button.vue';
+import UiButton from '@/components/ui/UiButton.vue';
 import { formatDate } from '@/composables/useFormatDate';
 
 const props = defineProps<{ id: string }>();
@@ -69,9 +69,9 @@ function onMouseLeave() {
 		class="detail-page"
 		:class="`bg-${achievement.theme}`"
 	>
-		<Button class="back-btn" variant="ghost" size="sm" @click="goBack">
+		<UiButton class="back-btn" variant="ghost" size="sm" @click="goBack">
 			← В каталог
-		</Button>
+		</UiButton>
 
 		<div class="trophy-wrap">
 			<div
@@ -133,14 +133,14 @@ function onMouseLeave() {
 			<section class="detail-section">
 				<div class="note-header">
 					<h2>Личная заметка</h2>
-					<Button
+					<UiButton
 						v-if="!isEditing"
 						variant="outline"
 						size="sm"
 						@click="isEditing = true"
 					>
 						Редактировать
-					</Button>
+					</UiButton>
 				</div>
 
 				<template v-if="!isEditing">
@@ -158,12 +158,12 @@ function onMouseLeave() {
 						autofocus
 					/>
 					<div class="note-actions">
-						<Button variant="primary" size="sm" @click="saveNote">
+						<UiButton variant="primary" size="sm" @click="saveNote">
 							Сохранить
-						</Button>
-						<Button variant="danger" size="sm" @click="isEditing = false">
+						</UiButton>
+						<UiButton variant="danger" size="sm" @click="isEditing = false">
 							Отмена
-						</Button>
+						</UiButton>
 					</div>
 				</div>
 			</section>
@@ -172,7 +172,7 @@ function onMouseLeave() {
 
 	<div v-else class="not-found">
 		<p>Такой ачивки нет</p>
-		<Button variant="outline" size="sm" @click="goBack">Вернуться</Button>
+		<UiButton variant="outline" size="sm" @click="goBack">Вернуться</UiButton>
 	</div>
 </template>
 

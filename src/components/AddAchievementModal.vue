@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-import Button from '@/components/ui/Button.vue';
-import Input from '@/components/ui/Input.vue';
+import UiButton from '@/components/ui/UiButton.vue';
+import UiInput from '@/components/ui/UiInput.vue';
 
 const emit = defineEmits<{
 	close: [];
@@ -42,7 +42,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
 			@click="onBackdropClick"
 		>
 			<div class="modal-card">
-				<Button
+				<UiButton
 					variant="ghost"
 					size="sm"
 					icon-only
@@ -59,7 +59,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
 							fill="none"
 						/>
 					</svg>
-				</Button>
+				</UiButton>
 
 				<h2 id="add-achievement-title">Зарегистрировать ачивку</h2>
 				<p class="description">
@@ -68,7 +68,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
 				</p>
 
 				<form class="form" @submit.prevent="submit">
-					<Input
+					<UiInput
 						v-model="code"
 						label="Код ачивки"
 						placeholder="ABCD-1234-EFGH"
@@ -79,15 +79,17 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
 					/>
 
 					<div class="actions">
-						<Button variant="outline" size="md" @click="close"> Отмена </Button>
-						<Button
+						<UiButton variant="outline" size="md" @click="close">
+							Отмена
+						</UiButton>
+						<UiButton
 							variant="primary"
 							size="md"
 							type="submit"
 							:disabled="!code.trim()"
 						>
 							Зарегистрировать
-						</Button>
+						</UiButton>
 					</div>
 				</form>
 			</div>

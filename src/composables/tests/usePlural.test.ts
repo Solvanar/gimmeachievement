@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { plural, pluralize, ACHIEVEMENT_FORMS } from './usePlural';
+import { plural, pluralize, ACHIEVEMENT_FORMS } from '../usePlural';
 
 describe('plural', () => {
 	const forms = ACHIEVEMENT_FORMS; // { one: 'ачивка', few: 'ачивки', many: 'ачивок' }

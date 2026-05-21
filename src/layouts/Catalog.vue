@@ -8,9 +8,9 @@ import {
 } from '@/constants/achievementThemes';
 import AchievementCard from '@/components/AchievementCard.vue';
 import AddAchievementModal from '@/components/AddAchievementModal.vue';
-import Button from '@/components/ui/Button.vue';
-import Chip from '@/components/ui/Chip.vue';
-import Spinner from '@/components/ui/Spinner.vue';
+import UiButton from '@/components/ui/UiButton.vue';
+import UiChip from '@/components/ui/UiChip.vue';
+import UiSpinner from '@/components/ui/UiSpinner.vue';
 import { pluralize, ACHIEVEMENT_FORMS } from '@/composables/usePlural';
 
 type FilterValue = AchievementTheme | 'all';
@@ -50,7 +50,6 @@ const filteredAchievements = computed(() =>
 );
 
 function onSubmitCode(code: string) {
-	// TODO: wire up to backend claim endpoint
 	console.log('Registering achievement with code:', code);
 	showAddModal.value = false;
 }
@@ -68,12 +67,12 @@ function onSubmitCode(code: string) {
 				<p v-else class="subtitle">Все достижения, что у нас есть</p>
 			</div>
 
-			<Button variant="primary" size="md" @click="showAddModal = true">
+			<UiButton variant="primary" size="md" @click="showAddModal = true">
 				<template #prefix>
 					<span class="add-icon" aria-hidden="true">+</span>
 				</template>
 				Добавить ачивку
-			</Button>
+			</UiButton>
 		</header>
 
 		<nav
@@ -81,7 +80,7 @@ function onSubmitCode(code: string) {
 			class="filters"
 			aria-label="Категории"
 		>
-			<Chip
+			<UiChip
 				v-for="opt in filterOptions"
 				:key="opt.value"
 				:active="selectedFilter === opt.value"
@@ -89,11 +88,11 @@ function onSubmitCode(code: string) {
 				@click="selectedFilter = opt.value"
 			>
 				{{ opt.label }}
-			</Chip>
+			</UiChip>
 		</nav>
 
 		<div v-if="store.loading" class="state-msg">
-			<Spinner size="lg" />
+			<UiSpinner size="lg" />
 		</div>
 		<p v-else-if="store.error" class="state-msg state-error">
 			{{ store.error }}

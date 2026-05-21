@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { apiGet, apiPost, apiDelete } from './api';
+import { apiGet, apiPost, apiDelete } from '../api';
 
 function mockResponse(body: unknown, init: ResponseInit = { status: 200 }) {
 	return new Response(JSON.stringify(body), {

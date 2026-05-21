@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatDate, formatDateShort } from './useFormatDate';
+import { formatDate, formatDateShort } from '../useFormatDate';
 
 type Case = { name: string; input: string; expected: string };
 

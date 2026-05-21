@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useColorSchemeStore } from '@/stores/colorScheme';
-import Button from '@/components/ui/Button.vue';
+import UiButton from '@/components/ui/UiButton.vue';
 
 const colorScheme = useColorSchemeStore();
 </script>
@@ -13,7 +13,7 @@ const colorScheme = useColorSchemeStore();
 		</RouterLink>
 
 		<div class="topbar-actions">
-			<Button
+			<UiButton
 				variant="outline"
 				size="md"
 				icon-only
@@ -59,7 +59,7 @@ const colorScheme = useColorSchemeStore();
 						fill="currentColor"
 					/>
 				</svg>
-			</Button>
+			</UiButton>
 
 			<RouterLink to="/profile" class="avatar" aria-label="Перейти в профиль">
 				<span>Я</span>

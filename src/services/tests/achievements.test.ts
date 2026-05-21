@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { fetchAchievements, fetchAchievement } from './achievements';
-import { apiGet } from './api';
+import { fetchAchievements, fetchAchievement } from '../achievements';
+import { apiGet } from '../api';
 import type { Achievement } from '@/types/achievement';
 
-vi.mock('./api', () => ({
+vi.mock('../api', () => ({
 	apiGet: vi.fn(),
 }));
 
