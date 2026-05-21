@@ -33,7 +33,6 @@ const {
 	hint,
 	error,
 	autocomplete,
-	spellcheck = true,
 	mask,
 } = defineProps<Props>();
 
@@ -49,13 +48,13 @@ const effectiveType = computed(() => {
 	return type;
 });
 
-function applyMask(raw: string, pattern: string): string {
-	const clean = raw.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+function applyMask(rawText: string, pattern: string): string {
+	const cleanChars = rawText.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
 	let result = '';
-	let ci = 0;
-	for (let i = 0; i < pattern.length && ci < clean.length; i++) {
+	let cleanIndex = 0;
+	for (let i = 0; i < pattern.length && cleanIndex < cleanChars.length; i++) {
 		if (pattern[i] === 'X') {
-			result += clean[ci++];
+			result += cleanChars[cleanIndex++];
 		} else {
 			result += pattern[i];
 		}
@@ -63,13 +62,13 @@ function applyMask(raw: string, pattern: string): string {
 	return result;
 }
 
-function onInput(e: Event) {
-	const raw = (e.target as HTMLInputElement).value;
-	const next = mask ? applyMask(raw, mask) : raw;
-	emit('update:modelValue', next);
-	// Keep the DOM input in sync when mask transforms the value
-	if (mask && next !== raw) {
-		(e.target as HTMLInputElement).value = next;
+function onInput(event: Event) {
+	const target = event.target as HTMLInputElement;
+	const rawText = target.value;
+	const formatted = mask ? applyMask(rawText, mask) : rawText;
+	emit('update:modelValue', formatted);
+	if (mask && formatted !== rawText) {
+		target.value = formatted;
 	}
 }
 </script>
@@ -89,7 +88,6 @@ function onInput(e: Event) {
 				:placeholder="placeholder"
 				:disabled="disabled"
 				:autocomplete="autocomplete"
-				:spellcheck="spellcheck"
 				class="field-input"
 				:class="{ 'has-trailing': type === 'password' }"
 				@input="onInput"

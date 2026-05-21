@@ -35,16 +35,19 @@ const glareX = ref(50);
 const glareY = ref(50);
 const isHovered = ref(false);
 
-function onMouseMove(e: MouseEvent) {
-	const el = trophyRef.value;
-	if (!el) return;
-	const rect = el.getBoundingClientRect();
-	const dx = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
-	const dy = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-	rotateX.value = -dy * 10;
-	rotateY.value = dx * 10;
-	glareX.value = ((e.clientX - rect.left) / rect.width) * 100;
-	glareY.value = ((e.clientY - rect.top) / rect.height) * 100;
+function onMouseMove(event: MouseEvent) {
+	const element = trophyRef.value;
+	if (!element) return;
+
+	const rect = element.getBoundingClientRect();
+	const deltaX =
+		(event.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+	const deltaY =
+		(event.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+	rotateX.value = -deltaY * 10;
+	rotateY.value = deltaX * 10;
+	glareX.value = ((event.clientX - rect.left) / rect.width) * 100;
+	glareY.value = ((event.clientY - rect.top) / rect.height) * 100;
 }
 
 function onMouseEnter() {

@@ -23,7 +23,7 @@ onMounted(() => store.fetchAll());
 const themeCounts = computed(() => {
 	const counts = {} as Record<AchievementTheme, number>;
 	for (const theme of Object.values(ACHIEVEMENT_THEMES)) counts[theme] = 0;
-	for (const a of store.achievements) counts[a.theme]++;
+	for (const achievement of store.achievements) counts[achievement.theme]++;
 	return counts;
 });
 
@@ -43,7 +43,9 @@ const filterOptions = computed<
 const filteredAchievements = computed(() =>
 	selectedFilter.value === 'all'
 		? store.achievements
-		: store.achievements.filter((a) => a.theme === selectedFilter.value),
+		: store.achievements.filter(
+				(achievement) => achievement.theme === selectedFilter.value,
+			),
 );
 
 function onSubmitCode(code: string) {

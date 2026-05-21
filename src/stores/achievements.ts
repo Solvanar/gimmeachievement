@@ -9,7 +9,8 @@ export const useAchievementsStore = defineStore('achievements', () => {
 	const error = ref<string | null>(null);
 
 	const getById = computed(
-		() => (id: string) => achievements.value.find((a) => a.id === id),
+		() => (id: string) =>
+			achievements.value.find((achievement) => achievement.id === id),
 	);
 
 	async function fetchAll() {
@@ -17,8 +18,8 @@ export const useAchievementsStore = defineStore('achievements', () => {
 		error.value = null;
 		try {
 			achievements.value = await fetchAchievements();
-		} catch (e) {
-			error.value = e instanceof Error ? e.message : 'Ошибка загрузки';
+		} catch (err) {
+			error.value = err instanceof Error ? err.message : 'Ошибка загрузки';
 		} finally {
 			loading.value = false;
 		}
@@ -27,16 +28,16 @@ export const useAchievementsStore = defineStore('achievements', () => {
 	async function fetchOne(id: string) {
 		if (getById.value(id)) return;
 		try {
-			const a = await fetchAchievement(id);
-			achievements.value.push(a);
-		} catch (e) {
-			error.value = e instanceof Error ? e.message : 'Ошибка загрузки';
+			const achievement = await fetchAchievement(id);
+			achievements.value.push(achievement);
+		} catch (err) {
+			error.value = err instanceof Error ? err.message : 'Ошибка загрузки';
 		}
 	}
 
 	function updateNote(id: string, note: string) {
-		const a = achievements.value.find((a) => a.id === id);
-		if (a) a.personalNote = note;
+		const achievement = achievements.value.find((item) => item.id === id);
+		if (achievement) achievement.personalNote = note;
 	}
 
 	return {

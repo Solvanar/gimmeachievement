@@ -20,12 +20,12 @@ function submit() {
 	emit('submit', value);
 }
 
-function onBackdropClick(e: MouseEvent) {
-	if (e.target === e.currentTarget) close();
+function onBackdropClick(event: MouseEvent) {
+	if (event.target === event.currentTarget) close();
 }
 
-function onKeydown(e: KeyboardEvent) {
-	if (e.key === 'Escape') close();
+function onKeydown(event: KeyboardEvent) {
+	if (event.key === 'Escape') close();
 }
 
 onMounted(() => document.addEventListener('keydown', onKeydown));

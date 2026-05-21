@@ -5,6 +5,7 @@ Achievement tracking platform with Vue 3 + Go backend.
 ## Stack
 
 Frontend:
+
 - Vue 3
 - TypeScript
 - Pinia
@@ -12,6 +13,7 @@ Frontend:
 - Vite
 
 Backend:
+
 - Go
 - PostgreSQL
 - Docker Compose
@@ -23,7 +25,6 @@ Backend:
 - personal notes
 - achievements details
 - responsive UI
-
 
 ## Run locally
 
