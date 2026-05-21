@@ -25,15 +25,16 @@ interface Props {
 
 const {
 	modelValue = '',
-	label,
+	label = undefined,
 	type = 'text',
-	placeholder,
+	placeholder = undefined,
 	size = 'md',
 	disabled = false,
-	hint,
-	error,
-	autocomplete,
-	mask,
+	hint = undefined,
+	error = undefined,
+	autocomplete = undefined,
+	spellcheck = true,
+	mask = undefined,
 } = defineProps<Props>();
 
 const emit = defineEmits<{
@@ -88,6 +89,7 @@ function onInput(event: Event) {
 				:placeholder="placeholder"
 				:disabled="disabled"
 				:autocomplete="autocomplete"
+				:spellcheck="spellcheck"
 				class="field-input"
 				:class="{ 'has-trailing': type === 'password' }"
 				@input="onInput"

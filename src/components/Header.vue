@@ -16,7 +16,7 @@ const colorScheme = useColorSchemeStore();
 			<Button
 				variant="outline"
 				size="md"
-				iconOnly
+				icon-only
 				:aria-label="
 					colorScheme.scheme === 'dark' ? 'Светлая тема' : 'Тёмная тема'
 				"

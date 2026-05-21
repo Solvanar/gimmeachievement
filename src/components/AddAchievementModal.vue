@@ -45,7 +45,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
 				<Button
 					variant="ghost"
 					size="sm"
-					iconOnly
+					icon-only
 					class="close-btn"
 					aria-label="Закрыть"
 					@click="close"

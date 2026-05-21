@@ -10,7 +10,7 @@ interface Props {
 
 const {
 	active = false,
-	count,
+	count = undefined,
 	size = 'md',
 	disabled = false,
 } = defineProps<Props>();

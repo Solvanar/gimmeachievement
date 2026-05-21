@@ -12,5 +12,6 @@ CREATE TABLE IF NOT EXISTS achievements (
 -- Seed data
 INSERT INTO achievements (title, description, theme) VALUES
     ('Seven nation army', 'Пройти 5+ игр по WW2', 'gaming'),
-    ('Fireball!!!', 'Поджег масло в процессе готовки', 'cooking'),
-    ('Git Blame', 'Нашел свой собственный баг на проде', 'gaming');
+    ('Fireball!!!', 'Поджечь масло в процессе готовки', 'cooking'),
+    ('Git Blame', 'Найти свой собственный баг на проде', 'gaming'),
+    ('Чайный мастер', 'Выпить более 15 литров чая за месяц', 'cooking');
