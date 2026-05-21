@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import type { Achievement } from '@/types/achievement';
-
-const API = 'http://localhost:8080';
+import { fetchAchievements, fetchAchievement } from '@/services/achievements';
 
 export const useAchievementsStore = defineStore('achievements', () => {
 	const achievements = ref<Achievement[]>([]);
@@ -17,10 +16,7 @@ export const useAchievementsStore = defineStore('achievements', () => {
 		loading.value = true;
 		error.value = null;
 		try {
-			const res = await fetch(`${API}/api/achievements`);
-
-			if (!res.ok) throw new Error(`HTTP ${res.status}`);
-			achievements.value = await res.json();
+			achievements.value = await fetchAchievements();
 		} catch (e) {
 			error.value = e instanceof Error ? e.message : 'Ошибка загрузки';
 		} finally {
@@ -31,9 +27,7 @@ export const useAchievementsStore = defineStore('achievements', () => {
 	async function fetchOne(id: string) {
 		if (getById.value(id)) return;
 		try {
-			const res = await fetch(`${API}/api/achievements/${id}`);
-			if (!res.ok) throw new Error(`HTTP ${res.status}`);
-			const a: Achievement = await res.json();
+			const a = await fetchAchievement(id);
 			achievements.value.push(a);
 		} catch (e) {
 			error.value = e instanceof Error ? e.message : 'Ошибка загрузки';

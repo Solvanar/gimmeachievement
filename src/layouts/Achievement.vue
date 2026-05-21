@@ -5,6 +5,7 @@ import { useAchievementsStore } from '@/stores/achievements';
 import { ACHIEVEMENT_THEMES } from '@/constants/achievementThemes';
 import GamingDecor from '@/components/decor/GamingDecor.vue';
 import Button from '@/components/ui/Button.vue';
+import { formatDate } from '@/composables/useFormatDate';
 
 const props = defineProps<{ id: string }>();
 const router = useRouter();
@@ -107,10 +108,7 @@ function onMouseLeave() {
 						<div class="trophy-text">
 							<h1>{{ achievement.title }}</h1>
 							<p class="trophy-date">
-								Получено
-								{{
-									new Date(achievement.createdAt).toLocaleDateString('ru-RU')
-								}}
+								Получено {{ formatDate(achievement.createdAt) }}
 							</p>
 						</div>
 					</div>

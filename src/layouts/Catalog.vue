@@ -10,6 +10,7 @@ import AchievementCard from '@/components/AchievementCard.vue';
 import AddAchievementModal from '@/components/AddAchievementModal.vue';
 import Button from '@/components/ui/Button.vue';
 import Chip from '@/components/ui/Chip.vue';
+import { pluralize, ACHIEVEMENT_FORMS } from '@/composables/usePlural';
 
 type FilterValue = AchievementTheme | 'all';
 
@@ -57,7 +58,11 @@ function onSubmitCode(code: string) {
 		<header class="catalog-header">
 			<div class="header-text">
 				<h1>Каталог</h1>
-				<p class="subtitle">Все достижения, что у нас есть</p>
+				<p v-if="store.achievements.length > 0" class="subtitle">
+					{{ pluralize(store.achievements.length, ACHIEVEMENT_FORMS) }} в
+					коллекции
+				</p>
+				<p v-else class="subtitle">Все достижения, что у нас есть</p>
 			</div>
 
 			<Button variant="primary" size="md" @click="showAddModal = true">
