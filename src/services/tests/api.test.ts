@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { apiGet, apiPost, apiDelete } from '../api';
+import { apiGet, apiPost, apiDelete, messageForStatus } from '../api';
 
 function mockResponse(body: unknown, init: ResponseInit = { status: 200 }) {
 	return new Response(JSON.stringify(body), {
@@ -106,5 +106,79 @@ describe('api service', () => {
 			const [, init] = fetchMock.mock.calls[0];
 			expect(init.method).toBe('DELETE');
 		});
+	});
+
+	describe('query params', () => {
+		it('appends query string when query is provided', async () => {
+			fetchMock.mockResolvedValueOnce(mockResponse([]));
+
+			await apiGet('/api/items', { query: { page: 1, q: 'test' } });
+
+			const [url] = fetchMock.mock.calls[0];
+			expect(url).toMatch(/\/api\/items\?/);
+			expect(url).toContain('page=1');
+			expect(url).toContain('q=test');
+		});
+
+		it('skips undefined and null values from the query', async () => {
+			fetchMock.mockResolvedValueOnce(mockResponse([]));
+
+			await apiGet('/api/items', {
+				query: { a: 'x', b: undefined, c: null, d: 0 },
+			});
+
+			const [url] = fetchMock.mock.calls[0];
+			expect(url).toContain('a=x');
+			expect(url).toContain('d=0');
+			expect(url).not.toContain('b=');
+			expect(url).not.toContain('c=');
+		});
+	});
+
+	describe('custom headers', () => {
+		it('merges custom headers with defaults', async () => {
+			fetchMock.mockResolvedValueOnce(mockResponse({}));
+
+			await apiGet('/api/anything', {
+				headers: { 'X-Custom': 'value' },
+			});
+
+			const [, init] = fetchMock.mock.calls[0];
+			expect(init.headers['Content-Type']).toBe('application/json');
+			expect(init.headers['X-Custom']).toBe('value');
+		});
+
+		it('allows custom header to override the default', async () => {
+			fetchMock.mockResolvedValueOnce(mockResponse({}));
+
+			await apiGet('/api/anything', {
+				headers: { 'Content-Type': 'text/plain' },
+			});
+
+			const [, init] = fetchMock.mock.calls[0];
+			expect(init.headers['Content-Type']).toBe('text/plain');
+		});
+	});
+});
+
+describe('messageForStatus', () => {
+	it.each([
+		[0, 'Не удалось соединиться с сервером'],
+		[401, 'Требуется авторизация'],
+		[404, 'Не найдено'],
+		[500, 'Внутренняя ошибка сервера'],
+	])(
+		'maps status %d to a human-readable Russian message',
+		(status, expected) => {
+			expect(messageForStatus(status)).toBe(expected);
+		},
+	);
+
+	it('falls back to a generic message for unknown 4xx', () => {
+		expect(messageForStatus(418)).toBe('Ошибка запроса (418)');
+	});
+
+	it('falls back to a generic 5xx message for unknown server errors', () => {
+		expect(messageForStatus(599)).toBe('Ошибка сервера');
 	});
 });
