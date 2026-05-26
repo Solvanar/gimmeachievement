@@ -12,7 +12,7 @@ const DEFAULT_TIMEOUT_MS = 4500;
 const notifications = ref<Notification[]>([]);
 
 function dismiss(id: string) {
-	notifications.value = notifications.value.filter((n) => n.id !== id);
+	notifications.value = notifications.value.filter((notification) => notification.id !== id);
 }
 
 function notify(text: string, level: NotificationLevel = 'info') {

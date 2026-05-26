@@ -44,71 +44,111 @@
 	--shadow-trophy: 0 20px 56px rgba(108, 99, 255, 0.25);
 
 	/* ════════════════════════════════════════
-     Achievement theme: GAMING (light)
+     Achievement theme: CYBER (light)
   ════════════════════════════════════════ */
-	--gaming-card-bg: linear-gradient(
+	--cyber-card-bg: rgba(236, 253, 245, 0.45);
+	--cyber-card-border: rgba(16, 185, 129, 0.25);
+	--cyber-card-text: #1a2e25;
+	--cyber-card-title: #1a3a2a;
+	--cyber-card-title-glow: rgba(16, 185, 129, 0.35);
+	--cyber-circle-bg: #ffffff;
+	--cyber-circle-border: #10b981;
+	--cyber-circle-ring: rgba(16, 185, 129, 0.1);
+	--cyber-circle-text: #059669;
+	--cyber-badge-bg: rgba(209, 250, 229, 0.55);
+	--cyber-badge-text: #065f46;
+	--cyber-badge-border: rgba(16, 185, 129, 0.3);
+	--cyber-accent: #10b981;
+	--cyber-glow: rgba(16, 185, 129, 0.2);
+	--cyber-neon-strip: #10b981;
+	--cyber-decor-overlay: linear-gradient(
 		135deg,
-		#e8e6ff 0%,
-		#d4d1ff 50%,
-		#c5c2f5 100%
-	);
-	--gaming-card-border: rgba(108, 99, 255, 0.5);
-	--gaming-card-text: #2d2d44;
-	--gaming-card-title: #4a44c4;
-	--gaming-card-title-glow: rgba(108, 99, 255, 0.35);
-	--gaming-image-bg: radial-gradient(circle, #c5c2f5, #a8a4ff);
-	--gaming-image-icon: #4a44c4;
-	--gaming-image-border: rgba(108, 99, 255, 0.6);
-	--gaming-decor-overlay: linear-gradient(
-		135deg,
-		rgba(108, 99, 255, 0.08) 0%,
+		rgba(16, 185, 129, 0.08),
 		transparent 60%
 	);
-	--gaming-page-aura: radial-gradient(
+	--cyber-page-bg: #f0fdf8;
+	--cyber-page-grid: rgba(16, 185, 129, 0.06);
+	--cyber-page-aura: radial-gradient(
 		ellipse at 50% 0%,
-		rgba(108, 99, 255, 0.22) 0%,
+		rgba(16, 185, 129, 0.22) 0%,
 		transparent 60%
 	);
-	--gaming-cord-base: #4a44c4;
-	--gaming-cord-highlight: #a8a4ff;
-	--gaming-cord-stripes: rgba(255, 255, 255, 0.5);
-	--gaming-ps-btn-bg: rgba(255, 255, 255, 0.92);
 
 	/* ════════════════════════════════════════
-     Achievement theme: COOKING (light)
+     Achievement theme: RETRO (light)
   ════════════════════════════════════════ */
-	--cooking-card-bg:
-		repeating-linear-gradient(
-			90deg,
-			rgba(92, 58, 30, 0.12) 0,
-			transparent 2px,
-			transparent 18px
-		),
-		repeating-linear-gradient(
-			0deg,
-			rgba(92, 58, 30, 0.06) 0,
-			transparent 2px,
-			transparent 18px
-		),
-		linear-gradient(135deg, #e8c298 0%, #d4a574 30%, #e8c298 60%, #c9924f 100%);
-	--cooking-card-border: #8b5e3c;
-	--cooking-card-text: #4a2e15;
-	--cooking-card-text-secondary: #6b4423;
-	--cooking-card-title: #5c3a1e;
-	--cooking-card-title-shadow: 1px 1px 1px rgba(255, 240, 200, 0.6);
-	--cooking-card-inset:
-		inset 0 0 20px rgba(92, 58, 30, 0.15),
-		inset 0 1px 0 rgba(255, 250, 230, 0.6);
-	--cooking-image-bg: radial-gradient(circle, #e8c298, #c9924f);
-	--cooking-image-icon: #5c3a1e;
-	--cooking-image-border: rgba(139, 90, 43, 0.5);
-	--cooking-image-shadow: inset 0 2px 4px rgba(92, 58, 30, 0.25);
-	--cooking-page-aura: radial-gradient(
+	--retro-card-bg: rgba(238, 242, 255, 0.45);
+	--retro-card-border: rgba(99, 102, 241, 0.25);
+	--retro-card-text: #1e1b4b;
+	--retro-card-title: #2d2a70;
+	--retro-card-title-glow: rgba(99, 102, 241, 0.35);
+	--retro-circle-bg: #ffffff;
+	--retro-circle-border: #6366f1;
+	--retro-circle-ring: rgba(99, 102, 241, 0.1);
+	--retro-circle-text: #4338ca;
+	--retro-badge-bg: rgba(224, 231, 255, 0.55);
+	--retro-badge-text: #312e81;
+	--retro-badge-border: rgba(99, 102, 241, 0.3);
+	--retro-accent: #6366f1;
+	--retro-glow: rgba(99, 102, 241, 0.2);
+	--retro-neon-strip: #6366f1;
+	--retro-page-bg: #f5f3ff;
+	--retro-page-grid: rgba(99, 102, 241, 0.06);
+	--retro-page-aura: radial-gradient(
 		ellipse at 50% 0%,
-		rgba(212, 165, 116, 0.4) 0%,
+		rgba(99, 102, 241, 0.22) 0%,
 		transparent 60%
 	);
-	--cooking-page-bg: #faf0e0;
+
+	/* ════════════════════════════════════════
+     Achievement theme: COZY (light)
+  ════════════════════════════════════════ */
+	--cozy-card-bg: rgba(255, 251, 235, 0.65);
+	--cozy-card-border: rgba(245, 158, 11, 0.3);
+	--cozy-card-text: #451a03;
+	--cozy-card-title: #78350f;
+	--cozy-card-title-glow: rgba(245, 158, 11, 0.4);
+	--cozy-circle-bg: #ffffff;
+	--cozy-circle-border: #d97706;
+	--cozy-circle-ring: rgba(245, 158, 11, 0.1);
+	--cozy-circle-text: #92400e;
+	--cozy-badge-bg: rgba(254, 243, 199, 0.6);
+	--cozy-badge-text: #78350f;
+	--cozy-badge-border: rgba(245, 158, 11, 0.2);
+	--cozy-accent: #d97706;
+	--cozy-glow: rgba(245, 158, 11, 0.2);
+	--cozy-neon-strip: #d97706;
+	--cozy-page-bg: #fffbeb;
+	--cozy-page-aura: radial-gradient(
+		ellipse at 50% 0%,
+		rgba(245, 158, 11, 0.25) 0%,
+		transparent 60%
+	);
+
+	/* ════════════════════════════════════════
+     Achievement theme: FOREST (light)
+  ════════════════════════════════════════ */
+	--forest-card-bg: rgba(236, 253, 245, 0.35);
+	--forest-card-border: rgba(52, 211, 153, 0.3);
+	--forest-card-text: #022c22;
+	--forest-card-title: #064e3b;
+	--forest-card-title-glow: rgba(16, 185, 129, 0.35);
+	--forest-circle-bg: #ffffff;
+	--forest-circle-border: #10b981;
+	--forest-circle-ring: rgba(16, 185, 129, 0.1);
+	--forest-circle-text: #065f46;
+	--forest-badge-bg: rgba(209, 250, 229, 0.65);
+	--forest-badge-text: #064e3b;
+	--forest-badge-border: rgba(16, 185, 129, 0.2);
+	--forest-accent: #10b981;
+	--forest-glow: rgba(16, 185, 129, 0.15);
+	--forest-neon-strip: #10b981;
+	--forest-page-bg: #f0fdf4;
+	--forest-page-aura: radial-gradient(
+		ellipse at 50% 0%,
+		rgba(16, 185, 129, 0.2) 0%,
+		transparent 60%
+	);
 
 	/* ════════════════════════════════════════
      Achievement theme: DEFAULT (light)
@@ -116,7 +156,36 @@
 	--default-card-bg: linear-gradient(135deg, #ffffff, #ececf5);
 	--default-card-border: rgba(26, 26, 46, 0.1);
 	--default-card-text: #1a1a2e;
-	--default-image-bg: rgba(26, 26, 46, 0.05);
-	--default-image-icon: rgba(26, 26, 46, 0.4);
-	--default-image-border: rgba(26, 26, 46, 0.1);
+	--default-card-title: #1a1a2e;
+	--default-card-title-glow: rgba(26, 26, 46, 0.2);
+	--default-circle-bg: rgba(26, 26, 46, 0.05);
+	--default-circle-border: rgba(26, 26, 46, 0.2);
+	--default-circle-ring: rgba(26, 26, 46, 0.05);
+	--default-circle-text: rgba(26, 26, 46, 0.5);
+	--default-badge-bg: rgba(26, 26, 46, 0.05);
+	--default-badge-text: rgba(26, 26, 46, 0.6);
+	--default-badge-border: rgba(26, 26, 46, 0.1);
+	--default-accent: rgba(26, 26, 46, 0.4);
+	--default-page-bg: #f5f4fa;
+	--default-page-aura: radial-gradient(
+		ellipse at 50% 0%,
+		rgba(26, 26, 46, 0.06) 0%,
+		transparent 60%
+	);
+
+	/* ── Locked state (light) ── */
+	--locked-card-bg: rgba(248, 248, 250, 0.9);
+	--locked-card-border: rgba(26, 26, 46, 0.08);
+	--locked-circle-bg: rgba(26, 26, 46, 0.05);
+	--locked-circle-border: rgba(26, 26, 46, 0.15);
+	--locked-circle-text: rgba(26, 26, 46, 0.3);
+	--locked-badge-bg: rgba(26, 26, 46, 0.05);
+	--locked-badge-text: rgba(26, 26, 46, 0.4);
+	--locked-badge-border: rgba(26, 26, 46, 0.08);
+
+	/* ── Legacy aliases ── */
+	--gaming-ps-btn-bg: rgba(255, 255, 255, 0.92);
+	--gaming-cord-base: #4a44c4;
+	--gaming-cord-highlight: #a8a4ff;
+	--gaming-cord-stripes: rgba(255, 255, 255, 0.5);
 }
