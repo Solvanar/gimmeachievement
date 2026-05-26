@@ -266,7 +266,6 @@ function submit(event: Event) {
 	font-weight: 700;
 	font-size: 0.78rem;
 	color: #e5e7eb;
-	truncate: true;
 }
 
 .is-retro-item .comment-author {
