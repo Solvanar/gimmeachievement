@@ -60,6 +60,7 @@ function applyMask(rawText: string, pattern: string): string {
 			result += pattern[i];
 		}
 	}
+
 	return result;
 }
 

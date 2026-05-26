@@ -27,6 +27,7 @@ function submit(event: Event) {
 	const formatted = code.value.trim().toUpperCase();
 	if (!formatted) {
 		errorMsg.value = 'Пожалуйста, введите код достижения.';
+
 		return;
 	}
 
@@ -37,11 +38,13 @@ function submit(event: Event) {
 	if (!target) {
 		errorMsg.value =
 			'Код не найден! Проверьте символы или нажмите на один из кодов снизу.';
+
 		return;
 	}
 
 	if (target.unlocked) {
 		errorMsg.value = `Ачивка «${target.title}» уже была разблокирована ранее!`;
+
 		return;
 	}
 

@@ -3,9 +3,22 @@ import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAchievementsStore } from '@/stores/achievements';
 import { useProfileStore } from '@/stores/profile';
-import { ACHIEVEMENT_THEMES, ACHIEVEMENT_THEME_LABELS, type AchievementTheme } from '@/constants/achievementThemes';
+import {
+	ACHIEVEMENT_THEMES,
+	ACHIEVEMENT_THEME_LABELS,
+	type AchievementTheme,
+} from '@/constants/achievementThemes';
 import AchievementCard from '@/components/AchievementCard.vue';
 import RegisterCode from '@/components/RegisterCode.vue';
+import ShieldIcon from '@/assets/icons/shield.svg?component';
+import CalendarIcon from '@/assets/icons/calendar.svg?component';
+import StarIcon from '@/assets/icons/star.svg?component';
+import AwardIcon from '@/assets/icons/award.svg?component';
+import CheckCircleIcon from '@/assets/icons/check-circle.svg?component';
+import LockIcon from '@/assets/icons/lock.svg?component';
+import FilterIcon from '@/assets/icons/filter.svg?component';
+import InfoIcon from '@/assets/icons/info.svg?component';
+import BriefcaseIcon from '@/assets/icons/briefcase.svg?component';
 
 type FilterValue = AchievementTheme | 'all';
 type StatusFilter = 'all' | 'unlocked' | 'locked';
@@ -20,7 +33,7 @@ const statusFilter = ref<StatusFilter>('all');
 const themeFilter = ref<FilterValue>('all');
 
 const totalPointsAvailable = computed(() =>
-	store.achievements.reduce((acc, a) => acc + (a.points ?? 0), 0),
+	store.achievements.reduce((sum, achievement) => sum + (achievement.points ?? 0), 0),
 );
 
 const level = computed(() => Math.floor(store.totalPoints / 100) + 1);
@@ -41,18 +54,22 @@ const filteredAchievements = computed(() =>
 	store.achievements.filter((ach) => {
 		if (statusFilter.value === 'unlocked' && !ach.unlocked) return false;
 		if (statusFilter.value === 'locked' && ach.unlocked) return false;
-		if (themeFilter.value !== 'all' && ach.theme !== themeFilter.value) return false;
+		if (themeFilter.value !== 'all' && ach.theme !== themeFilter.value)
+			return false;
+
 		return true;
 	}),
 );
 
-const themeOptions = computed<Array<{ value: FilterValue; label: string }>>(() => [
-	{ value: 'all', label: 'Любой' },
-	...Object.values(ACHIEVEMENT_THEMES).map((theme) => ({
-		value: theme,
-		label: ACHIEVEMENT_THEME_LABELS[theme],
-	})),
-]);
+const themeOptions = computed<Array<{ value: FilterValue; label: string }>>(
+	() => [
+		{ value: 'all', label: 'Любой' },
+		...Object.values(ACHIEVEMENT_THEMES).map((theme) => ({
+			value: theme,
+			label: ACHIEVEMENT_THEME_LABELS[theme],
+		})),
+	],
+);
 
 function openAchievement(id: string) {
 	router.push(`/achievement/${id}`);
@@ -61,12 +78,8 @@ function openAchievement(id: string) {
 
 <template>
 	<div class="profile-page">
-		<!-- Two-column layout -->
 		<div class="profile-grid">
-			<!-- Left: Profile + Achievement list -->
 			<div class="profile-main">
-
-				<!-- Profile Header Card -->
 				<div class="profile-card">
 					<div class="profile-banner">
 						<div class="banner-grid" />
@@ -90,30 +103,25 @@ function openAchievement(id: string) {
 
 						<div class="profile-info">
 							<div class="profile-name-row">
-								<h2 class="profile-name">{{ profileStore.profile.username }}</h2>
-								<span class="gamertag">@{{ profileStore.profile.gamerTag }}</span>
+								<h2 class="profile-name">
+									{{ profileStore.profile.username }}
+								</h2>
+								<span class="gamertag"
+									>@{{ profileStore.profile.gamerTag }}</span
+								>
 								<span class="rank-badge">
-									<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-										<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" fill="none" />
-									</svg>
+									<ShieldIcon class="rank-icon" />
 									{{ profileStore.profile.rank }}
 								</span>
 							</div>
 							<p class="profile-bio">{{ profileStore.profile.bio }}</p>
 							<div class="profile-meta">
 								<span>
-									<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-										<rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="none" />
-										<line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2" />
-										<line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2" />
-										<line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2" />
-									</svg>
+									<CalendarIcon class="meta-icon" />
 									Зарегистрирован: {{ profileStore.profile.joinDate }}
 								</span>
 								<span>
-									<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-										<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2" fill="none" />
-									</svg>
+									<StarIcon class="meta-icon" />
 									{{ store.unlockedCount }} ачивок получено
 								</span>
 							</div>
@@ -125,10 +133,7 @@ function openAchievement(id: string) {
 				<div class="gamerscore-card">
 					<div class="gamerscore-header">
 						<div class="gamerscore-label">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-								<circle cx="12" cy="8" r="7" stroke="#f59e0b" stroke-width="2" fill="none" />
-								<path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-							</svg>
+							<AwardIcon class="gamerscore-icon" />
 							ПРОГРЕСС И ГЕЙМЕРСКОР
 						</div>
 						<div class="gamerscore-score">
@@ -137,7 +142,10 @@ function openAchievement(id: string) {
 						</div>
 					</div>
 					<div class="progress-track">
-						<div class="progress-fill" :style="{ width: `${progressPercent}%` }" />
+						<div
+							class="progress-fill"
+							:style="{ width: `${progressPercent}%` }"
+						/>
 					</div>
 					<div class="gamerscore-footer">
 						<span>Уровень {{ level }} Hunter</span>
@@ -162,10 +170,7 @@ function openAchievement(id: string) {
 								:class="{ active: statusFilter === 'unlocked' }"
 								@click="statusFilter = 'unlocked'"
 							>
-								<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-									<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#34d399" stroke-width="2" stroke-linecap="round" />
-									<polyline points="22 4 12 14.01 9 11.01" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-								</svg>
+								<CheckCircleIcon class="filter-icon filter-icon--success" />
 								Полученные ({{ store.unlockedCount }})
 							</button>
 							<button
@@ -173,10 +178,7 @@ function openAchievement(id: string) {
 								:class="{ active: statusFilter === 'locked' }"
 								@click="statusFilter = 'locked'"
 							>
-								<svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-									<rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="#fb7185" stroke-width="2" fill="none" />
-									<path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#fb7185" stroke-width="2" stroke-linecap="round" />
-								</svg>
+								<LockIcon class="filter-icon filter-icon--danger" />
 								Закрытые ({{ store.achievements.length - store.unlockedCount }})
 							</button>
 						</div>
@@ -184,9 +186,7 @@ function openAchievement(id: string) {
 						<!-- Category/theme filter -->
 						<div class="theme-filter">
 							<span class="theme-filter-label">
-								<svg width="11" height="11" viewBox="0 0 24 24" fill="none">
-									<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" stroke="currentColor" stroke-width="2" fill="none" />
-								</svg>
+								<FilterIcon class="funnel-icon" />
 								Вайб:
 							</span>
 							<button
@@ -203,13 +203,11 @@ function openAchievement(id: string) {
 
 					<!-- Info hint -->
 					<div class="info-hint">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="info-icon">
-							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
-							<line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-							<line x1="12" y1="16" x2="12.01" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-						</svg>
+						<InfoIcon class="info-icon" />
 						<p>
-							Нажмите на любую <strong>полученную ачивку</strong> ниже, чтобы открыть её кастомную страницу с уникальным дизайном, историей получения и реакциями!
+							Нажмите на любую <strong>полученную ачивку</strong> ниже, чтобы
+							открыть её кастомную страницу с уникальным дизайном, историей
+							получения и реакциями!
 						</p>
 					</div>
 				</div>
@@ -229,7 +227,6 @@ function openAchievement(id: string) {
 						<AchievementCard :achievement="ach" :interactive="false" />
 					</div>
 				</div>
-
 			</div>
 
 			<!-- Right: Sidebar -->
@@ -238,17 +235,18 @@ function openAchievement(id: string) {
 
 				<div class="concept-card">
 					<h4 class="concept-title">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-							<rect x="2" y="7" width="20" height="14" rx="2" ry="2" stroke="#34d399" stroke-width="2" fill="none" />
-							<path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" stroke="#34d399" stroke-width="2" />
-						</svg>
+						<BriefcaseIcon class="concept-icon" />
 						Концепция Проекта
 					</h4>
 					<p>
-						Я создаю реальные, стильные <strong>металлические значки и магниты</strong> в виде ачивок! У каждого значка геймерский дизайн и напечатанный индивидуальный код на обратной стороне.
+						Я создаю реальные, стильные
+						<strong>металлические значки и магниты</strong> в виде ачивок! У
+						каждого значка геймерский дизайн и напечатанный индивидуальный код
+						на обратной стороне.
 					</p>
 					<p>
-						Зарегистрировав код тут, вы заводите цифровую карту ачивки, которая полностью меняет тему страницы под атмосферу самого значка!
+						Зарегистрировав код тут, вы заводите цифровую карту ачивки, которая
+						полностью меняет тему страницы под атмосферу самого значка!
 					</p>
 					<RouterLink to="/shop" class="shop-link">
 						Посмотреть каталог &amp; заказать значки 🛒
@@ -431,6 +429,18 @@ function openAchievement(id: string) {
 	color: var(--text-muted);
 }
 
+.rank-icon {
+	width: 12px;
+	height: 12px;
+	flex-shrink: 0;
+}
+
+.meta-icon {
+	width: 12px;
+	height: 12px;
+	flex-shrink: 0;
+}
+
 .rank-badge {
 	display: inline-flex;
 	align-items: center;
@@ -485,6 +495,13 @@ function openAchievement(id: string) {
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 12px;
+}
+
+.gamerscore-icon {
+	width: 18px;
+	height: 18px;
+	flex-shrink: 0;
+	color: #f59e0b;
 }
 
 .gamerscore-label {
@@ -605,6 +622,26 @@ function openAchievement(id: string) {
 	flex-wrap: wrap;
 }
 
+.filter-icon {
+	width: 12px;
+	height: 12px;
+	flex-shrink: 0;
+}
+
+.filter-icon--success {
+	color: #34d399;
+}
+
+.filter-icon--danger {
+	color: #fb7185;
+}
+
+.funnel-icon {
+	width: 11px;
+	height: 11px;
+	flex-shrink: 0;
+}
+
 .theme-filter-label {
 	display: inline-flex;
 	align-items: center;
@@ -655,6 +692,8 @@ function openAchievement(id: string) {
 }
 
 .info-icon {
+	width: 16px;
+	height: 16px;
 	flex-shrink: 0;
 	margin-top: 1px;
 	color: #818cf8;
@@ -718,6 +757,13 @@ function openAchievement(id: string) {
 	gap: 12px;
 }
 
+.concept-icon {
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+	color: #34d399;
+}
+
 .concept-title {
 	display: flex;
 	align-items: center;
@@ -758,7 +804,12 @@ function openAchievement(id: string) {
 
 /* ── Animations ── */
 @keyframes pulse-dot {
-	0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
-	50% { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0); }
+	0%,
+	100% {
+		box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
+	}
+	50% {
+		box-shadow: 0 0 0 4px rgba(16, 185, 129, 0);
+	}
 }
 </style>

@@ -25,6 +25,7 @@ const themeCounts = computed(() => {
 	const counts = {} as Record<AchievementTheme, number>;
 	for (const theme of Object.values(ACHIEVEMENT_THEMES)) counts[theme] = 0;
 	for (const achievement of store.achievements) counts[achievement.theme]++;
+
 	return counts;
 });
 

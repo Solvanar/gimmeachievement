@@ -16,6 +16,7 @@ function loadAchievements(): Achievement[] {
 			return [...MOCK_ACHIEVEMENTS];
 		}
 	}
+
 	return [...MOCK_ACHIEVEMENTS];
 }
 
@@ -28,6 +29,7 @@ function loadComments(): Record<string, AchievementComment[]> {
 			return { ...MOCK_COMMENTS };
 		}
 	}
+
 	return { ...MOCK_COMMENTS };
 }
 
@@ -124,6 +126,7 @@ export const useAchievementsStore = defineStore('achievements', () => {
 		if (!commentsDb.value[achievementId]) {
 			commentsDb.value[achievementId] = [];
 		}
+
 		commentsDb.value[achievementId] = [
 			newComment,
 			...commentsDb.value[achievementId],
