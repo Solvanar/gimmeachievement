@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import type { Achievement } from '@/types/achievement';
+import UiImage from '@/components/ui/UiImage.vue';
 import LockIcon from '@/assets/icons/lock.svg?component';
 import AwardIcon from '@/assets/icons/award.svg?component';
 
@@ -50,11 +51,11 @@ function onClick() {
 					<slot name="avatar-ring" />
 
 					<template v-if="achievement.unlocked">
-						<img
+						<UiImage
 							v-if="achievement.imageUrl"
 							:src="achievement.imageUrl"
 							:alt="achievement.title"
-							referrerpolicy="no-referrer"
+							size="full"
 							class="avatar-img"
 						/>
 						<div v-else class="avatar-placeholder">✦</div>
@@ -181,9 +182,6 @@ function onClick() {
 }
 
 .avatar-img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
 	transition: transform 0.5s ease;
 }
 

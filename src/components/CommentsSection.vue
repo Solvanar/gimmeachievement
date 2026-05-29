@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { AchievementComment } from '@/types/achievement';
+import UiImage from '@/components/ui/UiImage.vue';
 import MessageIcon from '@/assets/icons/message.svg?component';
 import SendIcon from '@/assets/icons/send.svg?component';
 
@@ -60,11 +61,11 @@ function submit(event: Event) {
 				class="comment-item"
 				:class="{ 'is-retro-item': isRetro() }"
 			>
-				<img
+				<UiImage
 					:src="comment.avatar"
 					:alt="comment.author"
-					referrerpolicy="no-referrer"
-					class="comment-avatar"
+					:size="36"
+					shape="circle"
 					:class="{ 'retro-avatar': isRetro() }"
 				/>
 				<div class="comment-body">
@@ -236,16 +237,8 @@ function submit(event: Event) {
 	background: rgba(23, 23, 27, 0.4);
 }
 
-.comment-avatar {
-	width: 36px;
-	height: 36px;
-	border-radius: 50%;
-	object-fit: cover;
-	flex-shrink: 0;
-}
-
-.comment-avatar.retro-avatar {
-	border-radius: 2px;
+.retro-avatar {
+	border-radius: 2px !important;
 	border: 1px solid #818cf8;
 }
 
