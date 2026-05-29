@@ -4,8 +4,8 @@ import { useAchievementsStore } from '@/stores/achievements';
 import { useProfileStore } from '@/stores/profile';
 import { useRouter } from 'vue-router';
 import CommentsSection from '@/components/CommentsSection.vue';
-import AHeader from '@/components/achievement/AHeader.vue';
 import ACard from '@/components/achievement/ACard.vue';
+import AHeader from '@/components/achievement/AHeader.vue';
 import AStory from '@/components/achievement/AStory.vue';
 import AReactions from '@/components/achievement/AReactions.vue';
 import { THEME_ACCENT_COLORS } from '@/constants/themeAccents';
@@ -36,7 +36,6 @@ function addComment(text: string) {
 		class="detail-page"
 		:class="`bg-theme-${achievement.theme}`"
 	>
-		<!-- Animated theme background -->
 		<div class="theme-bg" :class="`theme-bg-${achievement.theme}`">
 			<div v-if="achievement.theme === 'cyber'" class="cyber-grid" />
 			<div v-if="achievement.theme === 'retro'" class="retro-grid" />
@@ -47,7 +46,15 @@ function addComment(text: string) {
 		<AHeader />
 
 		<main class="detail-main">
-			<ACard :achievement="achievement" />
+			<div class="category-tag-wrap">
+				<span class="category-tag">
+					{{ (achievement.category ?? achievement.theme).toUpperCase() }} //
+					ACHIEVEMENT CARD
+				</span>
+			</div>
+			<div class="large-card-wrap">
+				<ACard :achievement="achievement" size="large" :interactive="false" />
+			</div>
 			<AStory :achievement="achievement" />
 			<AReactions />
 			<CommentsSection
@@ -60,14 +67,19 @@ function addComment(text: string) {
 				<span v-if="achievement.code">
 					LIFE ACHIEVEMENTS ID // {{ achievement.code }}
 				</span>
-				<span>ЦЕНИТЕ МОМЕНТЫ И СОБИРАЙТЕ СВОЮ КОЛЛЕКЦИЮ ЗНАЧКОВ С КАЖДОЙ ПОБЕДЫ</span>
+				<span
+					>ЦЕНИТЕ МОМЕНТЫ И СОБИРАЙТЕ СВОЮ КОЛЛЕКЦИЮ ЗНАЧКОВ С КАЖДОЙ
+					ПОБЕДЫ</span
+				>
 			</footer>
 		</main>
 	</div>
 
 	<div v-else class="not-found">
 		<p>Такой ачивки нет</p>
-		<button class="back-btn" @click="router.push('/profile')">← Вернуться</button>
+		<button class="back-btn" @click="router.push('/profile')">
+			← Вернуться
+		</button>
 	</div>
 </template>
 
@@ -87,11 +99,21 @@ function addComment(text: string) {
 	z-index: 0;
 }
 
-.theme-bg-cyber { background: var(--cyber-page-bg); }
-.theme-bg-retro { background: var(--retro-page-bg); }
-.theme-bg-cozy  { background: var(--cozy-page-bg); }
-.theme-bg-forest { background: var(--forest-page-bg); }
-.theme-bg-default { background: var(--page-bg); }
+.theme-bg-cyber {
+	background: var(--cyber-page-bg);
+}
+.theme-bg-retro {
+	background: var(--retro-page-bg);
+}
+.theme-bg-cozy {
+	background: var(--cozy-page-bg);
+}
+.theme-bg-forest {
+	background: var(--forest-page-bg);
+}
+.theme-bg-default {
+	background: var(--page-bg);
+}
 
 .cyber-grid {
 	position: absolute;
@@ -133,11 +155,21 @@ function addComment(text: string) {
 	pointer-events: none;
 }
 
-.bg-theme-cyber .theme-radial  { background: rgba(16, 185, 129, 0.05); }
-.bg-theme-retro .theme-radial  { background: rgba(99, 102, 241, 0.06); }
-.bg-theme-cozy .theme-radial   { background: rgba(245, 158, 11, 0.05); }
-.bg-theme-forest .theme-radial { background: rgba(16, 185, 129, 0.05); }
-.bg-theme-default .theme-radial { background: transparent; }
+.bg-theme-cyber .theme-radial {
+	background: rgba(16, 185, 129, 0.05);
+}
+.bg-theme-retro .theme-radial {
+	background: rgba(99, 102, 241, 0.06);
+}
+.bg-theme-cozy .theme-radial {
+	background: rgba(245, 158, 11, 0.05);
+}
+.bg-theme-forest .theme-radial {
+	background: rgba(16, 185, 129, 0.05);
+}
+.bg-theme-default .theme-radial {
+	background: transparent;
+}
 
 /* ── Main content ── */
 .detail-main {
@@ -146,6 +178,30 @@ function addComment(text: string) {
 	margin: 0 auto;
 	padding: 0 24px;
 	z-index: 20;
+}
+
+/* ── Card section ── */
+.category-tag-wrap {
+	text-align: center;
+	margin-bottom: 24px;
+}
+
+.category-tag {
+	font-family: monospace;
+	font-size: 0.65rem;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	padding: 5px 14px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 9999px;
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.large-card-wrap {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 32px;
 }
 
 /* ── Footer ── */

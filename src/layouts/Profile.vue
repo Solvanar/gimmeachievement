@@ -8,7 +8,7 @@ import {
 	ACHIEVEMENT_THEME_LABELS,
 	type AchievementTheme,
 } from '@/constants/achievementThemes';
-import AchievementCard from '@/components/AchievementCard.vue';
+import ACard from '@/components/achievement/ACard.vue';
 import RegisterCode from '@/components/RegisterCode.vue';
 import ShieldIcon from '@/assets/icons/shield.svg?component';
 import CalendarIcon from '@/assets/icons/calendar.svg?component';
@@ -224,7 +224,7 @@ function openAchievement(id: string) {
 						class="achievement-cell"
 						@click="openAchievement(ach.id)"
 					>
-						<AchievementCard :achievement="ach" :interactive="false" />
+						<ACard :achievement="ach" :interactive="false" />
 					</div>
 				</div>
 			</div>

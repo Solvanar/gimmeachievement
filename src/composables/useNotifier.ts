@@ -1,25 +1,27 @@
 import { ref } from 'vue';
 
-export type NotificationLevel = 'info' | 'success' | 'error';
+export type NotificationType = 'info' | 'success' | 'error';
 
 export interface Notification {
 	id: string;
-	level: NotificationLevel;
+	type: NotificationType;
 	text: string;
 }
 
-const DEFAULT_TIMEOUT_MS = 4500;
+const NOTIFICATION_TIMEOUT = 4500;
 const notifications = ref<Notification[]>([]);
 
-function dismiss(id: string) {
-	notifications.value = notifications.value.filter((notification) => notification.id !== id);
+function notify(text: string, type: NotificationType = 'info') {
+	const id = crypto.randomUUID();
+	notifications.value.push({ id, type, text });
+
+	window.setTimeout(() => dismiss(id), NOTIFICATION_TIMEOUT);
 }
 
-function notify(text: string, level: NotificationLevel = 'info') {
-	const id = crypto.randomUUID();
-	notifications.value.push({ id, level, text });
-
-	window.setTimeout(() => dismiss(id), DEFAULT_TIMEOUT_MS);
+function dismiss(id: string) {
+	notifications.value = notifications.value.filter(
+		(notification) => notification.id !== id,
+	);
 }
 
 export function useNotifier() {

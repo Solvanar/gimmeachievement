@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import type { ComponentPublicInstance } from 'vue';
 import type { Achievement } from '@/types/achievement';
-import BaseDecor from './BaseDecor.vue';
+import CardShell from './CardShell.vue';
 
 interface Props {
 	achievement: Achievement;
@@ -72,8 +72,9 @@ const cyberWire = computed(() => {
 </script>
 
 <template>
-	<BaseDecor
+	<CardShell
 		ref="baseRef"
+		class="cyber-shell"
 		:achievement="achievement"
 		:size="size"
 		:interactive="interactive"
@@ -177,10 +178,28 @@ const cyberWire = computed(() => {
 				<div class="neon-strip" />
 			</template>
 		</template>
-	</BaseDecor>
+	</CardShell>
 </template>
 
 <style scoped>
+.cyber-shell {
+	--card-bg: var(--cyber-card-bg);
+	--card-border-color: var(--cyber-card-border);
+	--card-text-color: var(--cyber-card-text);
+	--card-glow: var(--cyber-glow);
+	--card-hover-border-color: #10b981;
+	--card-hover-glow: var(--cyber-glow);
+	--circle-bg: var(--cyber-circle-bg);
+	--circle-border-color: var(--cyber-circle-border);
+	--circle-ring: var(--cyber-circle-ring);
+	--circle-text-color: var(--cyber-circle-text);
+	--title-color: var(--cyber-card-title);
+	--title-hover-color: #34d399;
+	--badge-bg: var(--cyber-badge-bg);
+	--badge-text-color: var(--cyber-badge-text);
+	--badge-border-color: var(--cyber-badge-border);
+}
+
 .cyber-crosshair {
 	position: absolute;
 	inset: -6px;

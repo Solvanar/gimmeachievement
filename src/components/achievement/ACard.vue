@@ -1,45 +1,39 @@
 <script setup lang="ts">
-import AchievementCard from '@/components/AchievementCard.vue';
+import { computed, type Component } from 'vue';
 import type { Achievement } from '@/types/achievement';
+import DefaultDecor from '@/components/decor/DefaultDecor.vue';
+import CyberDecor from '@/components/decor/CyberDecor.vue';
+import RetroDecor from '@/components/decor/RetroDecor.vue';
+import CozyDecor from '@/components/decor/CozyDecor.vue';
+import ForestDecor from '@/components/decor/ForestDecor.vue';
 
-defineProps<{ achievement: Achievement }>();
+interface Props {
+	achievement: Achievement;
+	size?: 'normal' | 'large';
+	interactive?: boolean;
+}
+
+const {
+	achievement,
+	size = 'normal',
+	interactive = true,
+} = defineProps<Props>();
+
+const themeCardMap: Record<string, Component> = {
+	cyber: CyberDecor,
+	retro: RetroDecor,
+	cozy: CozyDecor,
+	forest: ForestDecor,
+};
+
+const ThemeCard = computed(() => themeCardMap[achievement.theme] ?? DefaultDecor);
 </script>
 
 <template>
-	<div>
-		<div class="category-tag-wrap">
-			<span class="category-tag">
-				{{ (achievement.category ?? achievement.theme).toUpperCase() }} //
-				ACHIEVEMENT CARD
-			</span>
-		</div>
-		<div class="large-card-wrap">
-			<AchievementCard :achievement="achievement" size="large" :interactive="false" />
-		</div>
-	</div>
+	<component
+		:is="ThemeCard"
+		:achievement="achievement"
+		:size="size"
+		:interactive="interactive"
+	/>
 </template>
-
-<style scoped>
-.category-tag-wrap {
-	text-align: center;
-	margin-bottom: 24px;
-}
-
-.category-tag {
-	font-family: monospace;
-	font-size: 0.65rem;
-	text-transform: uppercase;
-	letter-spacing: 0.12em;
-	padding: 5px 14px;
-	background: rgba(255, 255, 255, 0.05);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 9999px;
-	color: rgba(255, 255, 255, 0.6);
-}
-
-.large-card-wrap {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 32px;
-}
-</style>

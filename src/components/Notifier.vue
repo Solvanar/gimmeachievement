@@ -6,26 +6,30 @@ const { notifications, dismiss } = useNotifier();
 
 <template>
 	<Teleport to="body">
-		<div class="notifier-stack" aria-live="polite">
+		<div class="notifier-list" aria-live="polite">
 			<TransitionGroup name="notifier">
-				<button
-					v-for="n in notifications"
-					:key="n.id"
-					type="button"
-					:class="['notifier', `level-${n.level}`]"
-					:aria-label="`Закрыть: ${n.text}`"
-					@click="dismiss(n.id)"
+				<div
+					v-for="notification in notifications"
+					:key="notification.id"
+					:class="['notifier', `type-${notification.type}`]"
 				>
 					<span class="notifier-dot" />
-					<span class="notifier-text">{{ n.text }}</span>
-				</button>
+					<span class="notifier-text">{{ notification.text }}</span>
+					<button
+						class="notifier-close"
+						:aria-label="`Закрыть: ${notification.text}`"
+						@click="dismiss(notification.id)"
+					>
+						✕
+					</button>
+				</div>
 			</TransitionGroup>
 		</div>
 	</Teleport>
 </template>
 
 <style scoped>
-.notifier-stack {
+.notifier-list {
 	position: fixed;
 	top: 76px;
 	right: 20px;
@@ -47,22 +51,27 @@ const { notifications, dismiss } = useNotifier();
 	border: 1px solid var(--surface-elevated-border);
 	border-radius: 12px;
 	color: var(--text-primary);
-	font-family: inherit;
 	font-size: 0.85rem;
 	line-height: 1.35;
-	text-align: left;
-	cursor: pointer;
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
 	box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
-	transition:
-		filter 0.15s ease,
-		transform 0.15s ease;
 }
 
-.notifier:hover {
-	filter: brightness(1.05);
-	transform: translateX(-2px);
+.notifier-close {
+	flex-shrink: 0;
+	background: none;
+	border: none;
+	color: var(--text-muted);
+	font-size: 0.75rem;
+	cursor: pointer;
+	padding: 0 0 0 4px;
+	line-height: 1;
+	transition: color 0.15s ease;
+}
+
+.notifier-close:hover {
+	color: var(--text-primary);
 }
 
 .notifier-dot {
@@ -76,24 +85,24 @@ const { notifications, dismiss } = useNotifier();
 	flex: 1;
 }
 
-.level-info {
+.type-info {
 	border-color: var(--notifier-info-border);
 }
-.level-info .notifier-dot {
+.type-info .notifier-dot {
 	background: var(--btn-primary-text);
 }
 
-.level-success {
+.type-success {
 	border-color: var(--notifier-success-border);
 }
-.level-success .notifier-dot {
+.type-success .notifier-dot {
 	background: var(--text-success);
 }
 
-.level-error {
+.type-error {
 	border-color: var(--notifier-error-border);
 }
-.level-error .notifier-dot {
+.type-error .notifier-dot {
 	background: var(--text-error);
 }
 

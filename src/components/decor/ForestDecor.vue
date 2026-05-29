@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Achievement } from '@/types/achievement';
-import BaseDecor from './BaseDecor.vue';
+import CardShell from './CardShell.vue';
 
 interface Props {
 	achievement: Achievement;
@@ -13,12 +13,13 @@ const {
 	size = 'normal',
 	interactive = true,
 } = defineProps<Props>();
+
 </script>
 
 <template>
-	<BaseDecor :achievement="achievement" :size="size" :interactive="interactive">
+	<CardShell class="forest-shell" :achievement="achievement" :size="size" :interactive="interactive">
 		<!-- Clipped background: campfire watermark -->
-		<template #bg>
+		<template #card-background>
 			<svg
 				v-if="achievement.unlocked"
 				class="forest-fire-svg"
@@ -62,10 +63,28 @@ const {
 				<span class="leaf-2">🍂</span>
 			</div>
 		</template>
-	</BaseDecor>
+	</CardShell>
 </template>
 
 <style scoped>
+.forest-shell {
+	--card-bg: var(--forest-card-bg);
+	--card-border-color: var(--forest-card-border);
+	--card-text-color: var(--forest-card-text);
+	--card-glow: var(--forest-glow);
+	--card-hover-border-color: #10b981;
+	--card-hover-glow: var(--forest-glow);
+	--circle-bg: var(--forest-circle-bg);
+	--circle-border-color: var(--forest-circle-border);
+	--circle-ring: var(--forest-circle-ring);
+	--circle-text-color: var(--forest-circle-text);
+	--title-color: var(--forest-card-title);
+	--title-hover-color: #6ee7b7;
+	--badge-bg: var(--forest-badge-bg);
+	--badge-text-color: var(--forest-badge-text);
+	--badge-border-color: var(--forest-badge-border);
+}
+
 /* ══════════════════════════════
    CLIPPED BACKGROUND
 ══════════════════════════════ */

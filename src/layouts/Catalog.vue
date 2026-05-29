@@ -6,7 +6,7 @@ import {
 	ACHIEVEMENT_THEME_LABELS,
 	type AchievementTheme,
 } from '@/constants/achievementThemes';
-import AchievementCard from '@/components/AchievementCard.vue';
+import ACard from '@/components/achievement/ACard.vue';
 import AddAchievementModal from '@/components/AddAchievementModal.vue';
 import UiButton from '@/components/ui/UiButton.vue';
 import UiChip from '@/components/ui/UiChip.vue';
@@ -108,7 +108,7 @@ function onSubmitCode(code: string) {
 				:key="achievement.id"
 				class="card-cell"
 			>
-				<AchievementCard :achievement="achievement" />
+				<ACard :achievement="achievement" />
 			</div>
 		</div>
 

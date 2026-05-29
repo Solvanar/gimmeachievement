@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Achievement } from '@/types/achievement';
-import BaseDecor from './BaseDecor.vue';
+import CardShell from './CardShell.vue';
 
 interface Props {
 	achievement: Achievement;
@@ -16,9 +16,9 @@ const {
 </script>
 
 <template>
-	<BaseDecor :achievement="achievement" :size="size" :interactive="interactive">
+	<CardShell class="retro-shell" :achievement="achievement" :size="size" :interactive="interactive">
 		<!-- Clipped background: waterfall stripe + loop SVG + checkerboard -->
-		<template #bg>
+		<template #card-background>
 			<template v-if="achievement.unlocked">
 				<div class="retro-waterfall" />
 				<svg class="retro-loop-svg" viewBox="0 0 100 100" aria-hidden="true">
@@ -78,10 +78,31 @@ const {
 				<div class="neon-strip" />
 			</template>
 		</template>
-	</BaseDecor>
+	</CardShell>
 </template>
 
 <style scoped>
+.retro-shell {
+	--card-bg: var(--retro-card-bg);
+	--card-border-color: var(--retro-card-border);
+	--card-text-color: var(--retro-card-text);
+	--card-glow: var(--retro-glow);
+	--card-hover-border-color: #818cf8;
+	--card-hover-glow: var(--retro-glow);
+	--circle-bg: var(--retro-circle-bg);
+	--circle-border-color: var(--retro-circle-border);
+	--circle-ring: var(--retro-circle-ring);
+	--circle-text-color: var(--retro-circle-text);
+	--title-color: var(--retro-card-title);
+	--title-font: monospace;
+	--title-hover-color: #fbbf24;
+	--subtitle-font: monospace;
+	--subtitle-size: 0.72rem;
+	--badge-bg: var(--retro-badge-bg);
+	--badge-text-color: var(--retro-badge-text);
+	--badge-border-color: var(--retro-badge-border);
+}
+
 /* ══════════════════════════════
    CLIPPED BACKGROUND
 ══════════════════════════════ */

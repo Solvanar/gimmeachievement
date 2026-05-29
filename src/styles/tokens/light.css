@@ -13,7 +13,7 @@
 	--text-success: #2ea043;
 
 	/* ── Notification colors ── */
-	--notifier-bg: rgba(255, 255, 255, 0.96);
+	--notifier-bg: rgba(255, 255, 255, 0.8);
 	--notifier-info-border: rgba(108, 99, 255, 0.5);
 	--notifier-success-border: rgba(46, 160, 67, 0.45);
 	--notifier-error-border: rgba(214, 40, 40, 0.45);

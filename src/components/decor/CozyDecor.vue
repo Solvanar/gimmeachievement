@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Achievement } from '@/types/achievement';
-import BaseDecor from './BaseDecor.vue';
+import CardShell from './CardShell.vue';
 
 interface Props {
 	achievement: Achievement;
@@ -13,12 +13,13 @@ const {
 	size = 'normal',
 	interactive = true,
 } = defineProps<Props>();
+
 </script>
 
 <template>
-	<BaseDecor :achievement="achievement" :size="size" :interactive="interactive">
+	<CardShell class="cozy-shell" :achievement="achievement" :size="size" :interactive="interactive">
 		<!-- Clipped background: coffee cup watermark -->
-		<template #bg>
+		<template #card-background>
 			<svg
 				v-if="achievement.unlocked"
 				class="cozy-coffee-svg"
@@ -54,10 +55,29 @@ const {
 				<span class="steam-2">♨</span>
 			</div>
 		</template>
-	</BaseDecor>
+	</CardShell>
 </template>
 
 <style scoped>
+.cozy-shell {
+	--card-bg: var(--cozy-card-bg);
+	--card-border-color: var(--cozy-card-border);
+	--card-text-color: var(--cozy-card-text);
+	--card-glow: var(--cozy-glow);
+	--card-hover-border-color: #f59e0b;
+	--card-hover-glow: var(--cozy-glow);
+	--circle-bg: var(--cozy-circle-bg);
+	--circle-border-color: var(--cozy-circle-border);
+	--circle-ring: var(--cozy-circle-ring);
+	--circle-text-color: var(--cozy-circle-text);
+	--title-color: var(--cozy-card-title);
+	--title-font: Georgia, serif;
+	--title-hover-color: #fcd34d;
+	--badge-bg: var(--cozy-badge-bg);
+	--badge-text-color: var(--cozy-badge-text);
+	--badge-border-color: var(--cozy-badge-border);
+}
+
 /* ══════════════════════════════
    CLIPPED BACKGROUND
 ══════════════════════════════ */
