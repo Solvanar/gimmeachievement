@@ -55,6 +55,6 @@ function openAchievement(id: string) {
 .empty-state p {
 	margin: 8px 0 0;
 	color: var(--text-muted);
-	font-size: 0.9rem;
+	font-size: var(--text-md);
 }
 </style>

@@ -1,0 +1,38 @@
+/* ══════════════════════════════════════════════════════
+   Типографические классы — общие текстовые роли проекта
+   ══════════════════════════════════════════════════════ */
+
+/* Геймерский лейбл: ПРОГРЕСС, УРОВЕНЬ, ГЕЙМЕРСКОР и т.п. */
+.text-mono-label {
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
+	font-weight: var(--font-bold);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-wider);
+}
+
+/* Моноширинное значение: очки, числа, коды */
+.text-mono-value {
+	font-family: var(--font-mono);
+	font-size: var(--text-sm);
+	font-weight: var(--font-bold);
+}
+
+/* Основной текст */
+.text-body {
+	font-size: var(--text-base);
+	line-height: var(--leading-normal);
+}
+
+/* Мелкий текст — описания, подписи */
+.text-body-sm {
+	font-size: var(--text-sm);
+	line-height: var(--leading-normal);
+}
+
+/* Подпись — даты, мета-информация */
+.text-caption {
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
+	line-height: var(--leading-snug);
+}

@@ -103,7 +103,7 @@ function submit(event: Event) {
 .comments-section.is-retro {
 	background: #09090b;
 	border-color: rgba(99, 102, 241, 0.3);
-	font-family: monospace;
+	font-family: var(--font-mono);
 }
 
 .comments-header {
@@ -114,8 +114,8 @@ function submit(event: Event) {
 }
 
 .comments-header h4 {
-	font-size: 0.95rem;
-	font-weight: 700;
+	font-size: var(--text-md);
+	font-weight: var(--font-bold);
 	color: var(--text-primary);
 	margin: 0;
 }
@@ -139,7 +139,7 @@ function submit(event: Event) {
 	border-radius: 12px;
 	color: var(--text-primary);
 	font-family: inherit;
-	font-size: 0.9rem;
+	font-size: var(--text-md);
 	transition: border-color 0.15s ease;
 }
 
@@ -155,7 +155,7 @@ function submit(event: Event) {
 .is-retro .comment-input {
 	border-color: rgba(99, 102, 241, 0.4);
 	color: #fef3c7;
-	font-family: monospace;
+	font-family: var(--font-mono);
 }
 
 .comment-submit {
@@ -166,8 +166,8 @@ function submit(event: Event) {
 	border: none;
 	border-radius: 12px;
 	color: #ffffff;
-	font-weight: 600;
-	font-size: 0.85rem;
+	font-weight: var(--font-semibold);
+	font-size: var(--text-base);
 	cursor: pointer;
 	transition: filter 0.15s ease, transform 0.1s ease;
 	white-space: nowrap;
@@ -216,7 +216,7 @@ function submit(event: Event) {
 	text-align: center;
 	padding: 24px 0;
 	font-style: italic;
-	font-size: 0.9rem;
+	font-size: var(--text-md);
 }
 
 .comment-item {
@@ -256,8 +256,8 @@ function submit(event: Event) {
 }
 
 .comment-author {
-	font-weight: 700;
-	font-size: 0.78rem;
+	font-weight: var(--font-bold);
+	font-size: var(--text-sm);
 	color: #e5e7eb;
 }
 
@@ -266,14 +266,14 @@ function submit(event: Event) {
 }
 
 .comment-time {
-	font-size: 0.7rem;
+	font-size: var(--text-xs);
 	color: var(--text-muted);
 	white-space: nowrap;
 }
 
 .comment-text {
-	font-size: 0.85rem;
-	line-height: 1.5;
+	font-size: var(--text-base);
+	line-height: var(--leading-normal);
 	color: #d1d5db;
 	margin: 0;
 }

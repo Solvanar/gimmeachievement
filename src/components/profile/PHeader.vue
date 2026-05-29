@@ -111,11 +111,11 @@ defineProps<Props>();
 	position: absolute;
 	bottom: 12px;
 	right: 16px;
-	font-family: monospace;
-	font-size: 0.62rem;
-	font-weight: 700;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
+	font-weight: var(--font-bold);
 	text-transform: uppercase;
-	letter-spacing: 0.08em;
+	letter-spacing: var(--tracking-wider);
 	padding: 4px 12px;
 	background: rgba(10, 10, 10, 0.6);
 	color: #f59e0b;
@@ -190,16 +190,16 @@ defineProps<Props>();
 
 .profile-name {
 	font-size: 1.4rem;
-	font-weight: 800;
-	letter-spacing: -0.02em;
+	font-weight: var(--font-extrabold);
+	letter-spacing: var(--tracking-tight);
 	color: var(--text-primary);
 	margin: 0;
 }
 
 .gamertag {
-	font-family: monospace;
-	font-size: 0.72rem;
-	font-weight: 600;
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
+	font-weight: var(--font-semibold);
 	padding: 3px 8px;
 	border-radius: 6px;
 	background: var(--surface-elevated-border);
@@ -210,9 +210,9 @@ defineProps<Props>();
 	display: inline-flex;
 	align-items: center;
 	gap: 4px;
-	font-family: monospace;
-	font-size: 0.68rem;
-	font-weight: 700;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
+	font-weight: var(--font-bold);
 	padding: 3px 8px;
 	border-radius: 9999px;
 	background: rgba(2, 44, 22, 0.5);
@@ -227,9 +227,9 @@ defineProps<Props>();
 }
 
 .profile-bio {
-	font-size: 0.85rem;
+	font-size: var(--text-base);
 	color: var(--text-secondary);
-	line-height: 1.6;
+	line-height: var(--leading-relaxed);
 	margin: 0 0 12px;
 	max-width: 60ch;
 }
@@ -238,8 +238,8 @@ defineProps<Props>();
 	display: flex;
 	align-items: center;
 	gap: 16px;
-	font-family: monospace;
-	font-size: 0.7rem;
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
 	color: var(--text-muted);
 	padding-top: 12px;
 	border-top: 1px solid var(--surface-elevated-border);

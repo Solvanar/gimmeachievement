@@ -51,7 +51,7 @@ const { notifications, dismiss } = useNotifier();
 	border: 1px solid var(--surface-elevated-border);
 	border-radius: 12px;
 	color: var(--text-primary);
-	font-size: 0.85rem;
+	font-size: var(--text-base);
 	line-height: 1.35;
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
@@ -63,10 +63,10 @@ const { notifications, dismiss } = useNotifier();
 	background: none;
 	border: none;
 	color: var(--text-muted);
-	font-size: 0.75rem;
+	font-size: var(--text-sm);
 	cursor: pointer;
 	padding: 0 0 0 4px;
-	line-height: 1;
+	line-height: var(--leading-none);
 	transition: color 0.15s ease;
 }
 

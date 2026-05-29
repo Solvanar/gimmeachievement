@@ -137,9 +137,9 @@ function onInput(event: Event) {
 }
 
 .field-label {
-	font-size: 0.7rem;
-	font-weight: 600;
-	letter-spacing: 0.1em;
+	font-size: var(--text-xs);
+	font-weight: var(--font-semibold);
+	letter-spacing: var(--tracking-widest);
 	text-transform: uppercase;
 	color: var(--text-muted);
 }
@@ -162,15 +162,15 @@ function onInput(event: Event) {
 
 .size-sm .field-input {
 	padding: 7px 12px;
-	font-size: 0.82rem;
+	font-size: var(--text-base);
 }
 .size-md .field-input {
 	padding: 11px 14px;
-	font-size: 0.95rem;
+	font-size: var(--text-md);
 }
 .size-lg .field-input {
 	padding: 13px 16px;
-	font-size: 1.05rem;
+	font-size: var(--text-lg);
 }
 
 .field-input.has-trailing {
@@ -223,9 +223,9 @@ function onInput(event: Event) {
 
 .field-message {
 	margin: 0;
-	font-size: 0.75rem;
+	font-size: var(--text-sm);
 	color: var(--text-muted);
-	line-height: 1.4;
+	line-height: var(--leading-snug);
 }
 .field-message.error {
 	color: var(--text-error);

@@ -115,10 +115,10 @@ function handleShare() {
 
 .card-label {
 	display: block;
-	font-family: monospace;
-	font-size: 0.65rem;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
 	text-transform: uppercase;
-	letter-spacing: 0.08em;
+	letter-spacing: var(--tracking-wider);
 	color: #6b7280;
 	margin-bottom: 12px;
 }
@@ -139,7 +139,7 @@ function handleShare() {
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	background: rgba(23, 23, 23, 1);
 	color: #9ca3af;
-	font-size: 0.78rem;
+	font-size: var(--text-sm);
 	cursor: pointer;
 	transition: all 0.15s ease;
 }
@@ -191,9 +191,9 @@ function handleShare() {
 }
 
 .share-hint {
-	font-size: 0.78rem;
+	font-size: var(--text-sm);
 	color: #6b7280;
-	line-height: 1.5;
+	line-height: var(--leading-normal);
 	margin: 0;
 }
 
@@ -208,8 +208,8 @@ function handleShare() {
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	background: rgba(23, 23, 23, 1);
 	color: #f59e0b;
-	font-size: 0.8rem;
-	font-weight: 600;
+	font-size: var(--text-sm);
+	font-weight: var(--font-semibold);
 	cursor: pointer;
 	transition: background 0.15s ease;
 }

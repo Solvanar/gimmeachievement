@@ -187,8 +187,8 @@ function addComment(text: string) {
 }
 
 .category-tag {
-	font-family: monospace;
-	font-size: 0.65rem;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
 	text-transform: uppercase;
 	letter-spacing: 0.12em;
 	padding: 5px 14px;
@@ -208,8 +208,8 @@ function addComment(text: string) {
 .detail-footer {
 	margin-top: 48px;
 	text-align: center;
-	font-family: monospace;
-	font-size: 0.65rem;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
 	color: #374151;
 	display: flex;
 	flex-direction: column;
@@ -235,7 +235,7 @@ function addComment(text: string) {
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	border-radius: 12px;
 	color: #9ca3af;
-	font-size: 0.85rem;
+	font-size: var(--text-base);
 	cursor: pointer;
 	transition:
 		color 0.15s ease,

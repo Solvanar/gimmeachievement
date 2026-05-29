@@ -132,17 +132,17 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
 
 h2 {
 	margin: 0 0 8px;
-	font-size: 1.25rem;
-	font-weight: 700;
+	font-size: var(--text-xl);
+	font-weight: var(--font-bold);
 	color: var(--text-primary);
-	letter-spacing: -0.01em;
+	letter-spacing: var(--tracking-snug);
 }
 
 .description {
 	margin: 0 0 22px;
 	color: var(--text-secondary);
-	font-size: 0.88rem;
-	line-height: 1.5;
+	font-size: var(--text-base);
+	line-height: var(--leading-normal);
 }
 
 .form {

@@ -160,17 +160,17 @@ function copySuggestion(suggestedCode: string) {
 }
 
 .rc-title {
-	font-size: 0.95rem;
-	font-weight: 700;
+	font-size: var(--text-md);
+	font-weight: var(--font-bold);
 	color: var(--text-primary);
 	margin: 0 0 2px;
 }
 
 .rc-subtitle {
-	font-size: 0.78rem;
+	font-size: var(--text-sm);
 	color: var(--text-muted);
 	margin: 0;
-	line-height: 1.4;
+	line-height: var(--leading-snug);
 }
 
 .rc-form {
@@ -191,10 +191,10 @@ function copySuggestion(suggestedCode: string) {
 	border: 1px solid var(--input-border);
 	border-radius: 12px;
 	color: var(--text-primary);
-	font-family: monospace;
-	font-size: 0.85rem;
+	font-family: var(--font-mono);
+	font-size: var(--text-base);
 	text-transform: uppercase;
-	letter-spacing: 0.1em;
+	letter-spacing: var(--tracking-widest);
 	transition: border-color 0.15s ease;
 }
 
@@ -218,10 +218,10 @@ function copySuggestion(suggestedCode: string) {
 	border: none;
 	border-radius: 12px;
 	color: #1a1a00;
-	font-weight: 800;
-	font-size: 0.78rem;
+	font-weight: var(--font-extrabold);
+	font-size: var(--text-sm);
 	text-transform: uppercase;
-	letter-spacing: 0.05em;
+	letter-spacing: var(--tracking-wide);
 	cursor: pointer;
 	white-space: nowrap;
 	transition: filter 0.15s ease, transform 0.1s ease;
@@ -242,9 +242,9 @@ function copySuggestion(suggestedCode: string) {
 	gap: 8px;
 	padding: 10px 14px;
 	border-radius: 12px;
-	font-size: 0.8rem;
-	font-weight: 500;
-	line-height: 1.4;
+	font-size: var(--text-sm);
+	font-weight: var(--font-medium);
+	line-height: var(--leading-snug);
 }
 
 .rc-msg--error {
@@ -283,18 +283,18 @@ function copySuggestion(suggestedCode: string) {
 
 .rc-suggestions-label {
 	display: block;
-	font-family: monospace;
-	font-size: 0.65rem;
-	font-weight: 600;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
+	font-weight: var(--font-semibold);
 	text-transform: uppercase;
-	letter-spacing: 0.1em;
+	letter-spacing: var(--tracking-widest);
 	color: var(--text-muted);
 	margin-bottom: 10px;
 }
 
 .all-unlocked {
-	font-family: monospace;
-	font-size: 0.8rem;
+	font-family: var(--font-mono);
+	font-size: var(--text-sm);
 	color: #4cd964;
 	font-style: italic;
 	margin: 0;
@@ -327,14 +327,14 @@ function copySuggestion(suggestedCode: string) {
 }
 
 .rc-chip span {
-	font-size: 0.72rem;
+	font-size: var(--text-xs);
 	color: var(--text-secondary);
 }
 
 .rc-chip code {
-	font-family: monospace;
-	font-size: 0.68rem;
-	font-weight: 700;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
+	font-weight: var(--font-bold);
 	padding: 1px 5px;
 	background: rgba(245, 158, 11, 0.1);
 	color: #f59e0b;

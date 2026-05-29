@@ -89,17 +89,17 @@ const steps = [
 
 .guide-title {
 	font-size: clamp(1.6rem, 4vw, 2.2rem);
-	font-weight: 900;
-	letter-spacing: -0.02em;
+	font-weight: var(--font-black);
+	letter-spacing: var(--tracking-tight);
 	color: var(--text-primary);
 	margin: 0;
 }
 
 .guide-subtitle {
-	font-size: 0.85rem;
+	font-size: var(--text-base);
 	color: var(--text-muted);
 	margin: 0;
-	line-height: 1.5;
+	line-height: var(--leading-normal);
 }
 
 /* ── Steps ── */
@@ -129,10 +129,10 @@ const steps = [
 }
 
 .step-num {
-	font-family: monospace;
+	font-family: var(--font-mono);
 	font-size: 2.2rem;
-	font-weight: 900;
-	line-height: 1;
+	font-weight: var(--font-black);
+	line-height: var(--leading-none);
 	flex-shrink: 0;
 	user-select: none;
 }
@@ -144,14 +144,14 @@ const steps = [
 }
 
 .step-title {
-	font-size: 0.95rem;
-	font-weight: 700;
+	font-size: var(--text-md);
+	font-weight: var(--font-bold);
 	color: var(--text-primary);
 	margin: 0;
 }
 
 .step-text {
-	font-size: 0.8rem;
+	font-size: var(--text-sm);
 	color: var(--text-muted);
 	line-height: 1.65;
 	margin: 0;
@@ -171,9 +171,9 @@ const steps = [
 }
 
 .cta-text {
-	font-size: 0.82rem;
+	font-size: var(--text-base);
 	color: var(--text-muted);
-	line-height: 1.5;
+	line-height: var(--leading-normal);
 	margin: 0;
 }
 
@@ -183,10 +183,10 @@ const steps = [
 	border: 1px solid rgba(99, 102, 241, 0.3);
 	border-radius: 14px;
 	color: #818cf8;
-	font-weight: 800;
-	font-size: 0.78rem;
+	font-weight: var(--font-extrabold);
+	font-size: var(--text-sm);
 	text-transform: uppercase;
-	letter-spacing: 0.05em;
+	letter-spacing: var(--tracking-wide);
 	cursor: pointer;
 	transition:
 		background 0.15s ease,
@@ -209,7 +209,7 @@ const steps = [
 	}
 
 	.step-num {
-		font-size: 1.8rem;
+		font-size: var(--text-3xl);
 	}
 }
 </style>

@@ -182,30 +182,30 @@ function handlePreorder() {
 .banner-tag {
 	display: inline-block;
 	width: fit-content;
-	font-family: monospace;
-	font-size: 0.62rem;
-	font-weight: 700;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
+	font-weight: var(--font-bold);
 	padding: 4px 12px;
 	border-radius: 999px;
 	background: rgba(99, 102, 241, 0.1);
 	color: #818cf8;
 	border: 1px solid rgba(99, 102, 241, 0.2);
-	letter-spacing: 0.05em;
+	letter-spacing: var(--tracking-wide);
 }
 
 .banner-title {
 	font-size: clamp(1.4rem, 3vw, 2rem);
-	font-weight: 900;
-	letter-spacing: -0.02em;
+	font-weight: var(--font-black);
+	letter-spacing: var(--tracking-tight);
 	color: #fff;
 	margin: 0;
-	line-height: 1.2;
+	line-height: var(--leading-tight);
 }
 
 .banner-desc {
-	font-size: 0.82rem;
+	font-size: var(--text-base);
 	color: rgba(255, 255, 255, 0.65);
-	line-height: 1.6;
+	line-height: var(--leading-relaxed);
 	max-width: 520px;
 	margin: 0;
 }
@@ -225,19 +225,19 @@ function handlePreorder() {
 }
 
 .price-label {
-	font-size: 0.72rem;
+	font-size: var(--text-xs);
 	color: rgba(255, 255, 255, 0.4);
 }
 
 .price-value {
-	font-size: 1.8rem;
-	font-weight: 900;
+	font-size: var(--text-3xl);
+	font-weight: var(--font-black);
 	color: #f59e0b;
-	line-height: 1;
+	line-height: var(--leading-none);
 }
 
 .price-note {
-	font-size: 0.62rem;
+	font-size: var(--text-2xs);
 	color: rgba(255, 255, 255, 0.3);
 }
 
@@ -307,9 +307,9 @@ function handlePreorder() {
 }
 
 .pill-code {
-	font-family: monospace;
-	font-size: 0.7rem;
-	font-weight: 700;
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
+	font-weight: var(--font-bold);
 	color: rgba(255, 255, 255, 0.85);
 	flex: 1;
 	min-width: 0;
@@ -319,9 +319,9 @@ function handlePreorder() {
 }
 
 .pill-points {
-	font-size: 0.65rem;
+	font-size: var(--text-2xs);
 	color: #f59e0b;
-	font-weight: 700;
+	font-weight: var(--font-bold);
 	flex-shrink: 0;
 }
 
@@ -329,9 +329,9 @@ function handlePreorder() {
 	position: absolute;
 	top: 8px;
 	right: 8px;
-	font-family: monospace;
-	font-size: 0.62rem;
-	font-weight: 900;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
+	font-weight: var(--font-black);
 	padding: 2px 8px;
 	border-radius: 4px;
 	border: 1px solid;
@@ -352,8 +352,8 @@ function handlePreorder() {
 }
 
 .product-name {
-	font-size: 0.95rem;
-	font-weight: 800;
+	font-size: var(--text-md);
+	font-weight: var(--font-extrabold);
 	color: var(--text-primary);
 	margin: 0;
 	transition: color 0.15s ease;
@@ -364,16 +364,16 @@ function handlePreorder() {
 }
 
 .product-material {
-	font-family: monospace;
-	font-size: 0.62rem;
-	font-weight: 600;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
+	font-weight: var(--font-semibold);
 	text-transform: uppercase;
-	letter-spacing: 0.05em;
+	letter-spacing: var(--tracking-wide);
 	color: var(--text-subtle);
 }
 
 .product-desc {
-	font-size: 0.78rem;
+	font-size: var(--text-sm);
 	color: var(--text-muted);
 	line-height: 1.55;
 	margin: 4px 0 0;
@@ -389,8 +389,8 @@ function handlePreorder() {
 }
 
 .product-price {
-	font-size: 0.95rem;
-	font-weight: 900;
+	font-size: var(--text-md);
+	font-weight: var(--font-black);
 	color: var(--text-primary);
 }
 
@@ -400,8 +400,8 @@ function handlePreorder() {
 	border: none;
 	border-radius: 12px;
 	color: #fff;
-	font-weight: 700;
-	font-size: 0.72rem;
+	font-weight: var(--font-bold);
+	font-size: var(--text-xs);
 	cursor: pointer;
 	transition:
 		background 0.15s ease,
@@ -431,10 +431,10 @@ function handlePreorder() {
 }
 
 .cta-text {
-	font-size: 0.82rem;
+	font-size: var(--text-base);
 	color: var(--text-muted);
 	margin: 0;
-	line-height: 1.5;
+	line-height: var(--leading-normal);
 }
 
 .cta-btn {
@@ -443,10 +443,10 @@ function handlePreorder() {
 	border: 1px solid rgba(99, 102, 241, 0.3);
 	border-radius: 12px;
 	color: #818cf8;
-	font-weight: 800;
-	font-size: 0.78rem;
+	font-weight: var(--font-extrabold);
+	font-size: var(--text-sm);
 	text-transform: uppercase;
-	letter-spacing: 0.05em;
+	letter-spacing: var(--tracking-wide);
 	cursor: pointer;
 	transition:
 		background 0.15s ease,

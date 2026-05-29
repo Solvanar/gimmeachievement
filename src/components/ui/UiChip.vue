@@ -46,11 +46,11 @@ const {
 
 .size-sm {
 	padding: 4px 10px;
-	font-size: 0.72rem;
+	font-size: var(--text-xs);
 }
 .size-md {
 	padding: 5px 12px;
-	font-size: 0.78rem;
+	font-size: var(--text-sm);
 }
 
 .ui-chip:hover:not(:disabled):not(.active) {
@@ -76,9 +76,9 @@ const {
 	border-radius: 999px;
 	background: var(--surface-elevated-border);
 	color: var(--text-muted);
-	font-size: 0.66rem;
-	font-weight: 600;
-	line-height: 1.5;
+	font-size: var(--text-2xs);
+	font-weight: var(--font-semibold);
+	line-height: var(--leading-normal);
 }
 .ui-chip.active .chip-count {
 	background: var(--page-bg);

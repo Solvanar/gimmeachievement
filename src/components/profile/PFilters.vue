@@ -107,8 +107,8 @@ const emit = defineEmits<{
 	align-items: center;
 	gap: 5px;
 	padding: 6px 12px;
-	font-size: 0.75rem;
-	font-weight: 600;
+	font-size: var(--text-sm);
+	font-weight: var(--font-semibold);
 	border-radius: 8px;
 	border: none;
 	background: transparent;
@@ -160,17 +160,17 @@ const emit = defineEmits<{
 	display: inline-flex;
 	align-items: center;
 	gap: 4px;
-	font-family: monospace;
-	font-size: 0.65rem;
-	font-weight: 600;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
+	font-weight: var(--font-semibold);
 	text-transform: uppercase;
 	color: var(--text-muted);
 }
 
 .theme-chip {
 	padding: 5px 10px;
-	font-size: 0.72rem;
-	font-weight: 600;
+	font-size: var(--text-xs);
+	font-weight: var(--font-semibold);
 	border-radius: 8px;
 	border: 1px solid transparent;
 	background: transparent;
@@ -200,9 +200,9 @@ const emit = defineEmits<{
 	background: rgba(30, 27, 75, 0.2);
 	border: 1px solid rgba(99, 102, 241, 0.2);
 	border-radius: 14px;
-	font-size: 0.78rem;
+	font-size: var(--text-sm);
 	color: #a5b4fc;
-	line-height: 1.5;
+	line-height: var(--leading-normal);
 }
 
 .info-icon {

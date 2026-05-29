@@ -65,16 +65,16 @@ import BriefcaseIcon from '@/assets/icons/briefcase.svg?component';
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	font-size: 0.88rem;
-	font-weight: 700;
+	font-size: var(--text-base);
+	font-weight: var(--font-bold);
 	color: var(--text-primary);
 	margin: 0;
 }
 
 .concept-card p {
-	font-size: 0.78rem;
+	font-size: var(--text-sm);
 	color: var(--text-secondary);
-	line-height: 1.6;
+	line-height: var(--leading-relaxed);
 	margin: 0;
 }
 
@@ -86,8 +86,8 @@ import BriefcaseIcon from '@/assets/icons/briefcase.svg?component';
 	border: 1px solid rgba(16, 185, 129, 0.2);
 	border-radius: 12px;
 	color: #34d399;
-	font-size: 0.78rem;
-	font-weight: 700;
+	font-size: var(--text-sm);
+	font-weight: var(--font-bold);
 	text-decoration: none;
 	transition:
 		background 0.15s ease,

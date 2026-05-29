@@ -130,9 +130,9 @@ const toggleLabel = computed(() =>
 }
 
 .brand-name {
-	font-weight: 800;
-	font-size: 0.9rem;
-	letter-spacing: -0.01em;
+	font-weight: var(--font-extrabold);
+	font-size: var(--text-md);
+	letter-spacing: var(--tracking-snug);
 	white-space: nowrap;
 }
 
@@ -152,8 +152,8 @@ const toggleLabel = computed(() =>
 	gap: 6px;
 	padding: 7px 12px;
 	border-radius: 10px;
-	font-size: 0.78rem;
-	font-weight: 600;
+	font-size: var(--text-sm);
+	font-weight: var(--font-semibold);
 	color: var(--text-muted);
 	text-decoration: none;
 	transition:
@@ -191,9 +191,9 @@ const toggleLabel = computed(() =>
 }
 
 .nav-badge {
-	font-family: monospace;
+	font-family: var(--font-mono);
 	font-size: 7px;
-	font-weight: 800;
+	font-weight: var(--font-extrabold);
 	padding: 1px 4px;
 	border-radius: 3px;
 	background: rgba(245, 158, 11, 0.15);
@@ -239,8 +239,8 @@ const toggleLabel = computed(() =>
 	border-radius: 50%;
 	background: linear-gradient(135deg, #f59e0b, #f97316);
 	color: #1a1a00;
-	font-weight: 700;
-	font-size: 0.85rem;
+	font-weight: var(--font-bold);
+	font-size: var(--text-base);
 	text-decoration: none;
 	cursor: pointer;
 	border: 2px solid transparent;

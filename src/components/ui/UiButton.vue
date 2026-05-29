@@ -52,7 +52,7 @@ const {
 	justify-content: center;
 	gap: 8px;
 	font-family: inherit;
-	font-weight: 500;
+	font-weight: var(--font-medium);
 	border-radius: 999px;
 	border: 1px solid transparent;
 	cursor: pointer;
@@ -80,15 +80,15 @@ const {
 /* ── Sizes ── */
 .size-sm {
 	padding: 6px 14px;
-	font-size: 0.78rem;
+	font-size: var(--text-sm);
 }
 .size-md {
 	padding: 9px 16px;
-	font-size: 0.85rem;
+	font-size: var(--text-base);
 }
 .size-lg {
 	padding: 12px 22px;
-	font-size: 0.95rem;
+	font-size: var(--text-md);
 }
 
 /* ── Styles ── */

@@ -195,7 +195,7 @@ const {
 	justify-content: center;
 	font-size: 9px;
 	color: #78350f;
-	font-weight: 700;
+	font-weight: var(--font-bold);
 	animation: retro-float-bounce 2.5s ease-in-out infinite;
 	box-shadow: 0 0 6px rgba(234, 179, 8, 0.5);
 }
@@ -226,7 +226,7 @@ const {
 	position: absolute;
 	top: 4px;
 	right: 25%;
-	font-family: monospace;
+	font-family: var(--font-mono);
 	font-size: 10px;
 	color: #34d399;
 	opacity: 0.8;

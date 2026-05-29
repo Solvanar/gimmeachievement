@@ -114,7 +114,7 @@ function saveStory() {
 .story-retro {
 	background: rgba(9, 9, 11, 0.9);
 	border-color: rgba(99, 102, 241, 0.4);
-	font-family: monospace;
+	font-family: var(--font-mono);
 }
 
 .story-header {
@@ -133,8 +133,8 @@ function saveStory() {
 }
 
 .story-title h3 {
-	font-size: 1.05rem;
-	font-weight: 700;
+	font-size: var(--text-lg);
+	font-weight: var(--font-bold);
 	color: #f3f4f6;
 	margin: 0;
 }
@@ -150,8 +150,8 @@ function saveStory() {
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
 	color: #f59e0b;
-	font-size: 0.78rem;
-	font-weight: 600;
+	font-size: var(--text-sm);
+	font-weight: var(--font-semibold);
 	cursor: pointer;
 	transition: background 0.15s ease;
 }
@@ -165,11 +165,11 @@ function saveStory() {
 }
 
 .story-locked {
-	font-size: 0.85rem;
+	font-size: var(--text-base);
 	color: #6b7280;
 	text-align: center;
 	padding: 24px 0;
-	line-height: 1.6;
+	line-height: var(--leading-relaxed);
 }
 
 .story-edit {
@@ -185,8 +185,8 @@ function saveStory() {
 	border: 1px solid rgba(255, 255, 255, 0.12);
 	border-radius: 14px;
 	color: #f3f4f6;
-	font-size: 0.88rem;
-	line-height: 1.6;
+	font-size: var(--text-base);
+	line-height: var(--leading-relaxed);
 	resize: vertical;
 	font-family: inherit;
 	transition: border-color 0.15s ease;
@@ -199,7 +199,7 @@ function saveStory() {
 }
 
 .story-textarea--retro {
-	font-family: monospace;
+	font-family: var(--font-mono);
 	border-color: rgba(99, 102, 241, 0.5);
 }
 
@@ -221,8 +221,8 @@ function saveStory() {
 	border: none;
 	border-radius: 12px;
 	color: #ffffff;
-	font-weight: 600;
-	font-size: 0.82rem;
+	font-weight: var(--font-semibold);
+	font-size: var(--text-base);
 	cursor: pointer;
 	transition:
 		filter 0.15s ease,
@@ -238,7 +238,7 @@ function saveStory() {
 }
 
 .story-text {
-	font-size: 0.9rem;
+	font-size: var(--text-md);
 	line-height: 1.7;
 	color: #d1d5db;
 	white-space: pre-wrap;
@@ -246,7 +246,7 @@ function saveStory() {
 }
 
 .story-empty {
-	font-size: 0.85rem;
+	font-size: var(--text-base);
 	color: #6b7280;
 	font-style: italic;
 	margin: 0;

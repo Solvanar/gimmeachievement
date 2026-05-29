@@ -38,7 +38,7 @@ const router = useRouter();
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	border-radius: 12px;
 	color: #9ca3af;
-	font-size: 0.85rem;
+	font-size: var(--text-base);
 	cursor: pointer;
 	backdrop-filter: blur(8px);
 	transition:

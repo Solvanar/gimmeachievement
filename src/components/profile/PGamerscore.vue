@@ -61,21 +61,21 @@ defineProps<Props>();
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
-	font-family: monospace;
-	font-size: 0.7rem;
-	font-weight: 700;
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
+	font-weight: var(--font-bold);
 	color: var(--text-muted);
 	text-transform: uppercase;
-	letter-spacing: 0.08em;
+	letter-spacing: var(--tracking-wider);
 }
 
 .gamerscore-score {
-	font-family: monospace;
-	font-size: 0.85rem;
+	font-family: var(--font-mono);
+	font-size: var(--text-base);
 }
 
 .score-current {
-	font-weight: 800;
+	font-weight: var(--font-extrabold);
 	color: #f59e0b;
 }
 
@@ -104,8 +104,8 @@ defineProps<Props>();
 .gamerscore-footer {
 	display: flex;
 	justify-content: space-between;
-	font-family: monospace;
-	font-size: 0.65rem;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
 	color: var(--text-muted);
 	margin-top: 8px;
 }

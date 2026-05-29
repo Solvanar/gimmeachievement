@@ -140,9 +140,9 @@ function onSubmitCode(code: string) {
 }
 
 .header-text h1 {
-	font-size: clamp(1.8rem, 4vw, 2.4rem);
-	font-weight: 800;
-	letter-spacing: -0.02em;
+	font-size: var(--text-hero);
+	font-weight: var(--font-extrabold);
+	letter-spacing: var(--tracking-tight);
 	margin: 0 0 4px;
 	background: linear-gradient(
 		135deg,
@@ -156,8 +156,8 @@ function onSubmitCode(code: string) {
 
 .subtitle {
 	color: var(--text-muted);
-	font-size: 0.78rem;
-	letter-spacing: 0.08em;
+	font-size: var(--text-sm);
+	letter-spacing: var(--tracking-wider);
 	text-transform: uppercase;
 	margin: 0;
 }
@@ -171,9 +171,9 @@ function onSubmitCode(code: string) {
 	border-radius: 50%;
 	background: var(--page-bg);
 	color: var(--text-primary);
-	font-size: 0.95rem;
-	font-weight: 700;
-	line-height: 1;
+	font-size: var(--text-md);
+	font-weight: var(--font-bold);
+	line-height: var(--leading-none);
 }
 
 /* ── Filters ── */
@@ -193,7 +193,7 @@ function onSubmitCode(code: string) {
 /* ── State ── */
 .state-msg {
 	color: var(--text-muted);
-	font-size: 0.95rem;
+	font-size: var(--text-md);
 	text-align: center;
 	padding: 40px 0;
 }

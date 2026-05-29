@@ -250,7 +250,7 @@ const cyberWire = computed(() => {
 	bottom: 16px;
 	left: 53%;
 	font-size: 16px;
-	font-weight: 700;
+	font-weight: var(--font-bold);
 	color: #818cf8;
 	opacity: 0.9;
 	filter: drop-shadow(0 0 6px rgba(129, 140, 248, 0.6));

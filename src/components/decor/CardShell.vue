@@ -190,7 +190,7 @@ function onClick() {
 }
 
 .avatar-placeholder {
-	font-size: 1.5rem;
+	font-size: var(--text-2xl);
 }
 
 .avatar-locked {
@@ -209,11 +209,11 @@ function onClick() {
 }
 
 .locked-label {
-	font-family: monospace;
+	font-family: var(--font-mono);
 	font-size: 7px;
-	font-weight: 700;
+	font-weight: var(--font-bold);
 	text-transform: uppercase;
-	letter-spacing: 0.05em;
+	letter-spacing: var(--tracking-wide);
 }
 
 .card-text {
@@ -234,9 +234,9 @@ function onClick() {
 .card-title {
 	margin: 0;
 	font-size: 1rem;
-	font-weight: 700;
-	line-height: 1.2;
-	letter-spacing: -0.01em;
+	font-weight: var(--font-bold);
+	line-height: var(--leading-tight);
+	letter-spacing: var(--tracking-snug);
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -246,7 +246,7 @@ function onClick() {
 }
 
 .is-large .card-title {
-	font-size: 1.25rem;
+	font-size: var(--text-xl);
 }
 
 .is-interactive:hover .card-title {
@@ -256,11 +256,11 @@ function onClick() {
 .unlocked-badge {
 	display: inline-flex;
 	align-items: center;
-	font-family: monospace;
+	font-family: var(--font-mono);
 	font-size: 8px;
-	font-weight: 700;
+	font-weight: var(--font-bold);
 	text-transform: uppercase;
-	letter-spacing: 0.05em;
+	letter-spacing: var(--tracking-wide);
 	background: rgba(16, 185, 129, 0.2);
 	color: #34d399;
 	padding: 2px 6px;
@@ -273,9 +273,9 @@ function onClick() {
 
 .card-subtitle {
 	margin: 0;
-	font-size: var(--subtitle-size, 0.8rem);
+	font-size: var(--subtitle-size, var(--text-sm));
 	font-family: var(--subtitle-font, inherit);
-	line-height: 1.4;
+	line-height: var(--leading-snug);
 	opacity: 0.8;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
@@ -285,8 +285,8 @@ function onClick() {
 
 .card-desc {
 	margin: 0;
-	font-size: 0.75rem;
-	line-height: 1.5;
+	font-size: var(--text-sm);
+	line-height: var(--leading-normal);
 	opacity: 0.7;
 	display: none;
 }
@@ -325,9 +325,9 @@ function onClick() {
 	display: flex;
 	align-items: center;
 	gap: 4px;
-	font-family: monospace;
-	font-size: 0.72rem;
-	font-weight: 700;
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
+	font-weight: var(--font-bold);
 	padding: 3px 8px;
 	border-radius: 9999px;
 	border: 1px solid var(--badge-border-color);
@@ -337,8 +337,8 @@ function onClick() {
 }
 
 .unlock-date {
-	font-family: monospace;
-	font-size: 0.62rem;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
 	opacity: 0.6;
 	color: var(--badge-text-color);
 	display: none;
