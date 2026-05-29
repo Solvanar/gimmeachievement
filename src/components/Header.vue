@@ -7,9 +7,10 @@ import BagIcon from '@/assets/icons/bag.svg?component';
 import HelpCircleIcon from '@/assets/icons/help-circle.svg?component';
 import SunIcon from '@/assets/icons/sun.svg?component';
 import MoonIcon from '@/assets/icons/moon.svg?component';
+import StarBrandIcon from '@/assets/icons/star-brand.svg?component';
 
 const route = useRoute();
-const colorScheme = useColorSchemeStore();
+const { scheme, toggle } = useColorSchemeStore();
 
 type NavIconKey = 'grid' | 'bag' | 'help';
 
@@ -36,22 +37,19 @@ function isActive(path: string) {
 	return route.path === path || (path === '/profile' && route.path === '/');
 }
 
-const isDark = computed(() => colorScheme.scheme === 'dark');
+const isDark = computed(() => scheme === 'dark');
+const toggleLabel = computed(() =>
+	isDark.value ? 'Светлая тема' : 'Тёмная тема',
+);
 </script>
 
 <template>
 	<header class="topbar">
 		<RouterLink to="/profile" class="brand">
 			<div class="brand-mark">
-				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-					<path
-						d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-						fill="currentColor"
-					/>
-				</svg>
+				<StarBrandIcon class="brand-icon" aria-hidden="true" />
 			</div>
 			<span class="brand-name">Ачивки Из Жизни</span>
-			<span class="brand-version">v1.2</span>
 		</RouterLink>
 
 		<nav class="topbar-nav" aria-label="Навигация">
@@ -62,7 +60,11 @@ const isDark = computed(() => colorScheme.scheme === 'dark');
 				class="nav-link"
 				:class="{ 'nav-link--active': isActive(item.to) }"
 			>
-				<component :is="navIconMap[item.icon]" class="nav-icon" aria-hidden="true" />
+				<component
+					:is="navIconMap[item.icon]"
+					class="nav-icon"
+					aria-hidden="true"
+				/>
 				<span>{{ item.label }}</span>
 				<span v-if="item.badge" class="nav-badge">{{ item.badge }}</span>
 			</RouterLink>
@@ -71,9 +73,9 @@ const isDark = computed(() => colorScheme.scheme === 'dark');
 		<div class="topbar-actions">
 			<button
 				class="action-btn"
-				:title="isDark ? 'Светлая тема' : 'Тёмная тема'"
-				:aria-label="isDark ? 'Светлая тема' : 'Тёмная тема'"
-				@click="colorScheme.toggle"
+				:title="toggleLabel"
+				:aria-label="toggleLabel"
+				@click="toggle"
 			>
 				<SunIcon v-if="isDark" class="theme-icon" aria-hidden="true" />
 				<MoonIcon v-else class="theme-icon" aria-hidden="true" />
@@ -97,12 +99,9 @@ const isDark = computed(() => colorScheme.scheme === 'dark');
 	padding: 14px 28px;
 	gap: 16px;
 	background: color-mix(in srgb, var(--page-bg) 85%, transparent);
-	backdrop-filter: blur(12px);
-	-webkit-backdrop-filter: blur(12px);
 	border-bottom: 1px solid var(--surface-elevated-border);
 }
 
-/* ── Brand ── */
 .brand {
 	display: flex;
 	align-items: center;
@@ -137,14 +136,6 @@ const isDark = computed(() => colorScheme.scheme === 'dark');
 	white-space: nowrap;
 }
 
-.brand-version {
-	font-family: monospace;
-	font-size: 0.62rem;
-	color: var(--text-subtle);
-	letter-spacing: 0.05em;
-}
-
-/* ── Navigation ── */
 .topbar-nav {
 	display: flex;
 	align-items: center;
@@ -189,6 +180,11 @@ const isDark = computed(() => colorScheme.scheme === 'dark');
 	flex-shrink: 0;
 }
 
+.brand-icon {
+	width: 18px;
+	height: 18px;
+}
+
 .theme-icon {
 	width: 18px;
 	height: 18px;
@@ -205,7 +201,6 @@ const isDark = computed(() => colorScheme.scheme === 'dark');
 	letter-spacing: 0.03em;
 }
 
-/* ── Actions ── */
 .topbar-actions {
 	display: flex;
 	align-items: center;
@@ -264,8 +259,7 @@ const isDark = computed(() => colorScheme.scheme === 'dark');
 		padding: 12px 16px;
 	}
 
-	.brand-name,
-	.brand-version {
+	.brand-name {
 		display: none;
 	}
 
