@@ -25,6 +25,8 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /api/achievements", achievements.List)
 	mux.HandleFunc("GET /api/achievements/{id}", achievements.Get)
+	mux.HandleFunc("PATCH /api/achievements/{id}/unlock", achievements.Unlock)
+	mux.HandleFunc("PATCH /api/achievements/{id}/note", achievements.UpdateNote)
 
 	port := os.Getenv("PORT")
 	if port == "" {

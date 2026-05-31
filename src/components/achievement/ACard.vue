@@ -2,7 +2,7 @@
 import { computed, type Component } from 'vue';
 import type { Achievement } from '@/types/achievement';
 import DefaultDecor from '@/components/decor/DefaultDecor.vue';
-import CyberDecor from '@/components/decor/CyberDecor.vue';
+import GamingDecor from '@/components/decor/GamingDecor.vue';
 import RetroDecor from '@/components/decor/RetroDecor.vue';
 import CozyDecor from '@/components/decor/CozyDecor.vue';
 import ForestDecor from '@/components/decor/ForestDecor.vue';
@@ -20,7 +20,7 @@ const {
 } = defineProps<Props>();
 
 const themeCardMap: Record<string, Component> = {
-	cyber: CyberDecor,
+	gaming: GamingDecor,
 	retro: RetroDecor,
 	cozy: CozyDecor,
 	forest: ForestDecor,

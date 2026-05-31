@@ -1,40 +1,33 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import type { Achievement, AchievementComment } from '@/types/achievement';
-import { MOCK_ACHIEVEMENTS, MOCK_COMMENTS } from '@/data/mockAchievements';
+import {
+	fetchAchievements,
+	fetchAchievement,
+	unlockAchievement as apiUnlock,
+	updateNote as apiUpdateNote,
+} from '@/services/achievements';
 import { useNotifier } from '@/composables/useNotifier';
 
-const STORAGE_ACHIEVEMENTS_KEY = 'gimme_achievements';
 const STORAGE_COMMENTS_KEY = 'gimme_comments';
-
-function loadAchievements(): Achievement[] {
-	const saved = localStorage.getItem(STORAGE_ACHIEVEMENTS_KEY);
-	if (saved) {
-		try {
-			return JSON.parse(saved) as Achievement[];
-		} catch {
-			return [...MOCK_ACHIEVEMENTS];
-		}
-	}
-
-	return [...MOCK_ACHIEVEMENTS];
-}
 
 function loadComments(): Record<string, AchievementComment[]> {
 	const saved = localStorage.getItem(STORAGE_COMMENTS_KEY);
-	if (saved) {
-		try {
-			return JSON.parse(saved) as Record<string, AchievementComment[]>;
-		} catch {
-			return { ...MOCK_COMMENTS };
-		}
-	}
+	if (!saved) return {};
 
-	return { ...MOCK_COMMENTS };
+	try {
+		return JSON.parse(saved) as Record<string, AchievementComment[]>;
+	} catch {
+		return {};
+	}
+}
+
+function saveComments(db: Record<string, AchievementComment[]>) {
+	localStorage.setItem(STORAGE_COMMENTS_KEY, JSON.stringify(db));
 }
 
 export const useAchievementsStore = defineStore('achievements', () => {
-	const achievements = ref<Achievement[]>(loadAchievements());
+	const achievements = ref<Achievement[]>([]);
 	const commentsDb = ref<Record<string, AchievementComment[]>>(loadComments());
 	const loading = ref(false);
 	const error = ref<string | null>(null);
@@ -60,31 +53,18 @@ export const useAchievementsStore = defineStore('achievements', () => {
 		() => achievements.value.filter((achievement) => achievement.unlocked).length,
 	);
 
-	function saveAchievements() {
-		localStorage.setItem(
-			STORAGE_ACHIEVEMENTS_KEY,
-			JSON.stringify(achievements.value),
-		);
-	}
-
-	function saveComments() {
-		localStorage.setItem(
-			STORAGE_COMMENTS_KEY,
-			JSON.stringify(commentsDb.value),
-		);
-	}
-
 	function handleError(err: unknown) {
 		error.value =
 			err instanceof Error ? err.message : 'Не удалось загрузить ачивки';
-		notifyError('Не удалось загрузить ачивки');
+		notifyError(error.value);
 	}
 
 	async function fetchAll() {
 		loading.value = true;
 		error.value = null;
+
 		try {
-			// Data is already initialized from localStorage / mock. No-op for now.
+			achievements.value = await fetchAchievements();
 		} catch (err) {
 			handleError(err);
 		} finally {
@@ -94,23 +74,44 @@ export const useAchievementsStore = defineStore('achievements', () => {
 
 	async function fetchOne(id: string) {
 		if (getById.value(id)) return;
-		error.value = 'Ачивка не найдена';
-	}
 
-	function updateNote(id: string, note: string) {
-		const achievement = achievements.value.find((item) => item.id === id);
-		if (achievement) {
-			achievement.personalNote = note;
-			saveAchievements();
+		loading.value = true;
+		error.value = null;
+
+		try {
+			const achievement = await fetchAchievement(id);
+			achievements.value.push(achievement);
+		} catch (err) {
+			handleError(err);
+		} finally {
+			loading.value = false;
 		}
 	}
 
-	function unlockAchievement(id: string) {
+	async function updateNote(id: string, note: string) {
 		const achievement = achievements.value.find((item) => item.id === id);
-		if (achievement && !achievement.unlocked) {
+
+		if (!achievement) return;
+
+		try {
+			await apiUpdateNote(id, note);
+			achievement.personalNote = note;
+		} catch (err) {
+			handleError(err);
+		}
+	}
+
+	async function unlockAchievement(id: string) {
+		const achievement = achievements.value.find((item) => item.id === id);
+
+		if (!achievement || achievement.unlocked) return;
+
+		try {
+			await apiUnlock(id);
 			achievement.unlocked = true;
 			achievement.unlockedAt = new Date().toISOString().split('T')[0];
-			saveAchievements();
+		} catch (err) {
+			handleError(err);
 		}
 	}
 
@@ -131,7 +132,7 @@ export const useAchievementsStore = defineStore('achievements', () => {
 			newComment,
 			...commentsDb.value[achievementId],
 		];
-		saveComments();
+		saveComments(commentsDb.value);
 	}
 
 	return {

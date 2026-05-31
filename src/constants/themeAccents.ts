@@ -1,7 +1,7 @@
 import type { AchievementTheme } from './achievementThemes';
 
 export const THEME_ACCENT_COLORS: Record<AchievementTheme, string> = {
-	cyber: '#10b981',
+	gaming: '#10b981',
 	retro: '#818cf8',
 	cozy: '#f59e0b',
 	forest: '#10b981',

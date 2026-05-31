@@ -25,6 +25,14 @@ export function apiPut<T>(
 	return request<T>(path, { ...options, method: 'PUT', body });
 }
 
+export function apiPatch<T>(
+	path: string,
+	body?: unknown,
+	options?: PublicOptions,
+): Promise<T> {
+	return request<T>(path, { ...options, method: 'PATCH', body });
+}
+
 export function apiDelete<T>(
 	path: string,
 	options?: PublicOptions,

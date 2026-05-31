@@ -44,31 +44,31 @@
 	--shadow-trophy: 0 20px 60px rgba(0, 0, 0, 0.6);
 
 	/* ════════════════════════════════════════
-     Achievement theme: CYBER (dark)
+     Achievement theme: GAMING (dark)
   ════════════════════════════════════════ */
-	--cyber-card-bg: #292929;
-	--cyber-card-border: rgba(16, 185, 129, 0.4);
-	--cyber-card-text: #f3f4f6;
-	--cyber-card-title: #ffffff;
-	--cyber-card-title-glow: rgba(16, 185, 129, 0.6);
-	--cyber-circle-bg: #0a0a0a;
-	--cyber-circle-border: #10b981;
-	--cyber-circle-ring: rgba(16, 185, 129, 0.2);
-	--cyber-circle-text: #34d399;
-	--cyber-badge-bg: rgba(2, 44, 22, 0.5);
-	--cyber-badge-text: #34d399;
-	--cyber-badge-border: rgba(16, 185, 129, 0.3);
-	--cyber-accent: #10b981;
-	--cyber-glow: rgba(16, 185, 129, 0.25);
-	--cyber-neon-strip: #34d399;
-	--cyber-decor-overlay: linear-gradient(
+	--gaming-card-bg: #292929;
+	--gaming-card-border: rgba(16, 185, 129, 0.4);
+	--gaming-card-text: #f3f4f6;
+	--gaming-card-title: #ffffff;
+	--gaming-card-title-glow: rgba(16, 185, 129, 0.6);
+	--gaming-circle-bg: #0a0a0a;
+	--gaming-circle-border: #10b981;
+	--gaming-circle-ring: rgba(16, 185, 129, 0.2);
+	--gaming-circle-text: #34d399;
+	--gaming-badge-bg: rgba(2, 44, 22, 0.5);
+	--gaming-badge-text: #34d399;
+	--gaming-badge-border: rgba(16, 185, 129, 0.3);
+	--gaming-accent: #10b981;
+	--gaming-glow: rgba(16, 185, 129, 0.25);
+	--gaming-neon-strip: #34d399;
+	--gaming-decor-overlay: linear-gradient(
 		135deg,
 		rgba(16, 185, 129, 0.05),
 		transparent 60%
 	);
-	--cyber-page-bg: #030712;
-	--cyber-page-grid: rgba(16, 185, 129, 0.04);
-	--cyber-page-aura: radial-gradient(
+	--gaming-page-bg: #030712;
+	--gaming-page-grid: rgba(16, 185, 129, 0.04);
+	--gaming-page-aura: radial-gradient(
 		ellipse at 50% 0%,
 		rgba(16, 185, 129, 0.12) 0%,
 		transparent 60%

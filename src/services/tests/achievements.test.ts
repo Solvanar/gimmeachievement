@@ -21,7 +21,7 @@ describe('achievements service', () => {
 					id: '1',
 					title: 'Test',
 					description: 'desc',
-					theme: 'cyber',
+					theme: 'gaming',
 					createdAt: '2026-05-21T00:00:00Z',
 				},
 			];

@@ -1,5 +1,5 @@
 export const ACHIEVEMENT_THEMES = {
-	CYBER: 'cyber',
+	GAMING: 'gaming',
 	RETRO: 'retro',
 	COZY: 'cozy',
 	FOREST: 'forest',
@@ -10,7 +10,7 @@ export type AchievementTheme =
 	(typeof ACHIEVEMENT_THEMES)[keyof typeof ACHIEVEMENT_THEMES];
 
 export const ACHIEVEMENT_THEME_LABELS: Record<AchievementTheme, string> = {
-	cyber: '🎮 Геймерский',
+	gaming: '🎮 Геймерский',
 	retro: '👾 Пиксельный',
 	cozy: '☕ Уютный',
 	forest: '🌿 Лесной',

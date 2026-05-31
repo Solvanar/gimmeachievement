@@ -37,7 +37,7 @@ function addComment(text: string) {
 		:class="`bg-theme-${achievement.theme}`"
 	>
 		<div class="theme-bg" :class="`theme-bg-${achievement.theme}`">
-			<div v-if="achievement.theme === 'cyber'" class="cyber-grid" />
+			<div v-if="achievement.theme === 'gaming'" class="gaming-grid" />
 			<div v-if="achievement.theme === 'retro'" class="retro-grid" />
 			<div v-if="achievement.theme === 'retro'" class="retro-scanlines" />
 			<div class="theme-radial" />
@@ -99,8 +99,8 @@ function addComment(text: string) {
 	z-index: 0;
 }
 
-.theme-bg-cyber {
-	background: var(--cyber-page-bg);
+.theme-bg-gaming {
+	background: var(--gaming-page-bg);
 }
 .theme-bg-retro {
 	background: var(--retro-page-bg);
@@ -115,12 +115,12 @@ function addComment(text: string) {
 	background: var(--page-bg);
 }
 
-.cyber-grid {
+.gaming-grid {
 	position: absolute;
 	inset: 0;
 	background-image:
-		linear-gradient(var(--cyber-page-grid) 1px, transparent 1px),
-		linear-gradient(90deg, var(--cyber-page-grid) 1px, transparent 1px);
+		linear-gradient(var(--gaming-page-grid) 1px, transparent 1px),
+		linear-gradient(90deg, var(--gaming-page-grid) 1px, transparent 1px);
 	background-size: 40px 40px;
 }
 
@@ -155,7 +155,7 @@ function addComment(text: string) {
 	pointer-events: none;
 }
 
-.bg-theme-cyber .theme-radial {
+.bg-theme-gaming .theme-radial {
 	background: rgba(16, 185, 129, 0.05);
 }
 .bg-theme-retro .theme-radial {

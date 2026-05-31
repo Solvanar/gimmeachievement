@@ -107,9 +107,9 @@ function onClick() {
 	display: flex;
 	align-items: center;
 	border: 1px solid var(--card-border-color);
-	border-radius: 32px;
+	border-radius: 36px;
 	padding: 5px 72px 5px 5px;
-	min-height: 5.5rem;
+	min-height: 4.5rem;
 	background: var(--card-bg);
 	color: var(--card-text-color);
 	box-shadow: 0 8px 24px var(--card-glow, transparent);
@@ -305,7 +305,7 @@ function onClick() {
 
 .points-badge {
 	position: absolute;
-	right: 12px;
+	right: var(--points-badge-right, 12px);
 	top: 50%;
 	transform: translateY(-50%);
 	display: flex;
@@ -318,7 +318,7 @@ function onClick() {
 }
 
 .is-large .points-badge {
-	right: 20px;
+	right: var(--points-badge-right-lg, 20px);
 }
 
 .points-pill {
