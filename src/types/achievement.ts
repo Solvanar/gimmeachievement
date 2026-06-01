@@ -2,16 +2,6 @@ import type { AchievementTheme } from '@/constants/achievementThemes';
 
 export type { AchievementTheme };
 
-export type AchievementCategory = 'gaming' | 'pixel' | 'lifestyle' | 'creative';
-
-export interface AchievementComment {
-	id: string;
-	author: string;
-	avatar: string;
-	text: string;
-	timestamp: string;
-}
-
 export interface Achievement {
 	id: string;
 	title: string;
@@ -19,13 +9,23 @@ export interface Achievement {
 	description: string;
 	theme: AchievementTheme;
 	imageUrl?: string;
-	personalNote?: string;
+	points: number;
 	createdAt: string;
-	code?: string;
-	points?: number;
-	unlocked?: boolean;
+	userAchievementId?: string;
+	unlocked: boolean;
 	unlockedAt?: string;
-	category?: AchievementCategory;
-	accentColor?: string;
-	customIcon?: string;
+	personalNote?: string;
+}
+
+export interface AchievementComment {
+	id: string;
+	userId: string;
+	userDisplayName: string;
+	userAvatar?: string;
+	userAchievementId?: string;
+	achievementTypeId?: string;
+	text: string;
+	createdAt: string;
+	modifiedAt?: string;
+	replyToId?: string;
 }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { AchievementComment } from '@/types/achievement';
+import { formatDate } from '@/composables/useFormatDate';
 import UiImage from '@/components/ui/UiImage.vue';
 import MessageIcon from '@/assets/icons/message.svg?component';
 import SendIcon from '@/assets/icons/send.svg?component';
@@ -62,16 +63,16 @@ function submit(event: Event) {
 				:class="{ 'is-retro-item': isRetro() }"
 			>
 				<UiImage
-					:src="comment.avatar"
-					:alt="comment.author"
+					:src="comment.userAvatar ?? ''"
+					:alt="comment.userDisplayName"
 					:size="36"
 					shape="circle"
 					:class="{ 'retro-avatar': isRetro() }"
 				/>
 				<div class="comment-body">
 					<div class="comment-meta">
-						<span class="comment-author">{{ comment.author }}</span>
-						<span class="comment-time">{{ comment.timestamp }}</span>
+						<span class="comment-author">{{ comment.userDisplayName }}</span>
+						<span class="comment-time">{{ formatDate(comment.createdAt) }}</span>
 					</div>
 					<p class="comment-text">{{ comment.text }}</p>
 				</div>

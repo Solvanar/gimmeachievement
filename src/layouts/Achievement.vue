@@ -1,38 +1,31 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
 import { useAchievementsStore } from '@/stores/achievements';
-import { useProfileStore } from '@/stores/profile';
 import { useRouter } from 'vue-router';
 import CommentsSection from '@/components/CommentsSection.vue';
 import ACard from '@/components/achievement/ACard.vue';
 import AHeader from '@/components/achievement/AHeader.vue';
 import AStory from '@/components/achievement/AStory.vue';
 import AReactions from '@/components/achievement/AReactions.vue';
+import UiSpinner from '@/components/ui/UiSpinner.vue';
 import { THEME_ACCENT_COLORS } from '@/constants/themeAccents';
 
 const props = defineProps<{ id: string }>();
 const store = useAchievementsStore();
-const profileStore = useProfileStore();
 const router = useRouter();
 
 const achievement = computed(() => store.getById(props.id));
-const comments = computed(() => store.getComments(props.id));
 
 onMounted(() => store.fetchOne(props.id));
-
-function addComment(text: string) {
-	store.addComment(
-		props.id,
-		text,
-		profileStore.profile.username,
-		profileStore.profile.avatar,
-	);
-}
 </script>
 
 <template>
+	<div v-if="store.loading" class="loading">
+		<UiSpinner />
+	</div>
+
 	<div
-		v-if="achievement"
+		v-else-if="achievement"
 		class="detail-page"
 		:class="`bg-theme-${achievement.theme}`"
 	>
@@ -48,8 +41,7 @@ function addComment(text: string) {
 		<main class="detail-main">
 			<div class="category-tag-wrap">
 				<span class="category-tag">
-					{{ (achievement.category ?? achievement.theme).toUpperCase() }} //
-					ACHIEVEMENT CARD
+					{{ achievement.theme.toUpperCase() }} // ACHIEVEMENT CARD
 				</span>
 			</div>
 			<div class="large-card-wrap">
@@ -58,19 +50,12 @@ function addComment(text: string) {
 			<AStory :achievement="achievement" />
 			<AReactions />
 			<CommentsSection
-				:comments="comments"
+				:comments="[]"
 				:accent-color="THEME_ACCENT_COLORS[achievement.theme] ?? '#10b981'"
 				:theme-type="achievement.theme"
-				@add-comment="addComment"
 			/>
 			<footer class="detail-footer">
-				<span v-if="achievement.code">
-					LIFE ACHIEVEMENTS ID // {{ achievement.code }}
-				</span>
-				<span
-					>ЦЕНИТЕ МОМЕНТЫ И СОБИРАЙТЕ СВОЮ КОЛЛЕКЦИЮ ЗНАЧКОВ С КАЖДОЙ
-					ПОБЕДЫ</span
-				>
+				<span>ЦЕНИТЕ МОМЕНТЫ И СОБИРАЙТЕ СВОЮ КОЛЛЕКЦИЮ ЗНАЧКОВ С КАЖДОЙ ПОБЕДЫ</span>
 			</footer>
 		</main>
 	</div>

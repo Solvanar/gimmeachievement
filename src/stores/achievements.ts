@@ -1,61 +1,37 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import type { Achievement, AchievementComment } from '@/types/achievement';
+import type { Achievement } from '@/types/achievement';
 import {
 	fetchAchievements,
 	fetchAchievement,
-	unlockAchievement as apiUnlock,
+	activateCode as apiActivateCode,
 	updateNote as apiUpdateNote,
 } from '@/services/achievements';
 import { useNotifier } from '@/composables/useNotifier';
 
-const STORAGE_COMMENTS_KEY = 'gimme_comments';
-
-function loadComments(): Record<string, AchievementComment[]> {
-	const saved = localStorage.getItem(STORAGE_COMMENTS_KEY);
-	if (!saved) return {};
-
-	try {
-		return JSON.parse(saved) as Record<string, AchievementComment[]>;
-	} catch {
-		return {};
-	}
-}
-
-function saveComments(db: Record<string, AchievementComment[]>) {
-	localStorage.setItem(STORAGE_COMMENTS_KEY, JSON.stringify(db));
-}
-
 export const useAchievementsStore = defineStore('achievements', () => {
 	const achievements = ref<Achievement[]>([]);
-	const commentsDb = ref<Record<string, AchievementComment[]>>(loadComments());
 	const loading = ref(false);
 	const error = ref<string | null>(null);
 
 	const { notifyError } = useNotifier();
 
 	const getById = computed(
-		() => (id: string) =>
-			achievements.value.find((achievement) => achievement.id === id),
-	);
-
-	const getComments = computed(
-		() => (id: string) => commentsDb.value[id] ?? [],
+		() => (id: string) => achievements.value.find((item) => item.id === id),
 	);
 
 	const totalPoints = computed(() =>
 		achievements.value
-			.filter((achievement) => achievement.unlocked)
-			.reduce((sum, achievement) => sum + (achievement.points ?? 0), 0),
+			.filter((item) => item.unlocked)
+			.reduce((sum, item) => sum + item.points, 0),
 	);
 
 	const unlockedCount = computed(
-		() => achievements.value.filter((achievement) => achievement.unlocked).length,
+		() => achievements.value.filter((item) => item.unlocked).length,
 	);
 
 	function handleError(err: unknown) {
-		error.value =
-			err instanceof Error ? err.message : 'Не удалось загрузить ачивки';
+		error.value = err instanceof Error ? err.message : 'Что-то пошло не так';
 		notifyError(error.value);
 	}
 
@@ -88,66 +64,40 @@ export const useAchievementsStore = defineStore('achievements', () => {
 		}
 	}
 
-	async function updateNote(id: string, note: string) {
-		const achievement = achievements.value.find((item) => item.id === id);
+	async function activateCode(code: string): Promise<Achievement> {
+		const unlocked = await apiActivateCode(code);
+		const index = achievements.value.findIndex((item) => item.id === unlocked.id);
 
-		if (!achievement) return;
+		if (index !== -1) {
+			achievements.value[index] = unlocked;
+		}
+
+		return unlocked;
+	}
+
+	async function updateNote(achievementId: string, note: string) {
+		const achievement = achievements.value.find((item) => item.id === achievementId);
+
+		if (!achievement?.userAchievementId) return;
 
 		try {
-			await apiUpdateNote(id, note);
+			await apiUpdateNote(achievement.userAchievementId, note);
 			achievement.personalNote = note;
 		} catch (err) {
 			handleError(err);
 		}
 	}
 
-	async function unlockAchievement(id: string) {
-		const achievement = achievements.value.find((item) => item.id === id);
-
-		if (!achievement || achievement.unlocked) return;
-
-		try {
-			await apiUnlock(id);
-			achievement.unlocked = true;
-			achievement.unlockedAt = new Date().toISOString().split('T')[0];
-		} catch (err) {
-			handleError(err);
-		}
-	}
-
-	function addComment(achievementId: string, text: string, author: string, avatar: string) {
-		const newComment: AchievementComment = {
-			id: `${achievementId}-c-${Date.now()}`,
-			author,
-			avatar,
-			text,
-			timestamp: 'Только что',
-		};
-
-		if (!commentsDb.value[achievementId]) {
-			commentsDb.value[achievementId] = [];
-		}
-
-		commentsDb.value[achievementId] = [
-			newComment,
-			...commentsDb.value[achievementId],
-		];
-		saveComments(commentsDb.value);
-	}
-
 	return {
 		achievements,
-		commentsDb,
 		loading,
 		error,
 		getById,
-		getComments,
 		totalPoints,
 		unlockedCount,
 		fetchAll,
 		fetchOne,
+		activateCode,
 		updateNote,
-		unlockAchievement,
-		addComment,
 	};
 });

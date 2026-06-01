@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useAchievementsStore } from '@/stores/achievements';
 import { useAchievementToast } from '@/composables/useAchievementToast';
-import type { Achievement } from '@/types/achievement';
+import { ApiError } from '@/services/api';
 import KeyIcon from '@/assets/icons/key.svg?component';
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg?component';
 import AlertCircleIcon from '@/assets/icons/alert-circle.svg?component';
@@ -14,50 +14,34 @@ const { triggerToast } = useAchievementToast();
 const code = ref('');
 const errorMsg = ref('');
 const successMsg = ref('');
+const submitting = ref(false);
 
-const lockedAchievements = computed(() =>
-	store.achievements.filter((achievement) => !achievement.unlocked),
-);
-
-function submit(event: Event) {
+async function submit(event: Event) {
 	event.preventDefault();
 	errorMsg.value = '';
 	successMsg.value = '';
 
 	const formatted = code.value.trim().toUpperCase();
+
 	if (!formatted) {
 		errorMsg.value = 'Пожалуйста, введите код достижения.';
 
 		return;
 	}
 
-	const target = store.achievements.find(
-		(achievement) => (achievement.code ?? '').toUpperCase() === formatted,
-	);
+	submitting.value = true;
 
-	if (!target) {
+	try {
+		const achievement = await store.activateCode(formatted);
+		successMsg.value = `Поздравляем! «${achievement.title}» добавлена в профиль!`;
+		triggerToast(achievement);
+		code.value = '';
+	} catch (err) {
 		errorMsg.value =
-			'Код не найден! Проверьте символы или нажмите на один из кодов снизу.';
-
-		return;
+			err instanceof ApiError ? err.message : 'Не удалось активировать код.';
+	} finally {
+		submitting.value = false;
 	}
-
-	if (target.unlocked) {
-		errorMsg.value = `Ачивка «${target.title}» уже была разблокирована ранее!`;
-
-		return;
-	}
-
-	store.unlockAchievement(target.id);
-	successMsg.value = `Поздравляем! «${target.title}» добавлена в профиль!`;
-	triggerToast(target as Achievement);
-	code.value = '';
-}
-
-function copySuggestion(suggestedCode: string) {
-	code.value = suggestedCode;
-	errorMsg.value = '';
-	successMsg.value = '';
 }
 </script>
 
@@ -86,9 +70,9 @@ function copySuggestion(suggestedCode: string) {
 					:spellcheck="false"
 					@input="errorMsg = ''"
 				/>
-				<button type="submit" class="rc-submit">
+				<button type="submit" class="rc-submit" :disabled="submitting">
 					<ArrowRightIcon class="rc-submit-icon" />
-					<span>Активировать!</span>
+					<span>{{ submitting ? 'Активация...' : 'Активировать!' }}</span>
 				</button>
 			</div>
 
@@ -103,25 +87,6 @@ function copySuggestion(suggestedCode: string) {
 				</div>
 			</Transition>
 		</form>
-
-		<div class="rc-suggestions">
-			<span class="rc-suggestions-label">КОДЫ ДЛЯ ТЕСТИРОВАНИЯ (клик для ввода):</span>
-			<p v-if="lockedAchievements.length === 0" class="all-unlocked">
-				✔ Вы разблокировали все доступные ачивки!
-			</p>
-			<div v-else class="rc-chips">
-				<button
-					v-for="ach in lockedAchievements"
-					:key="ach.id"
-					type="button"
-					class="rc-chip"
-					@click="copySuggestion(ach.code ?? '')"
-				>
-					<span>{{ ach.title }}</span>
-					<code>{{ ach.code }}</code>
-				</button>
-			</div>
-		</div>
 	</div>
 </template>
 
