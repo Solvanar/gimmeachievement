@@ -92,9 +92,9 @@ func (h *AchievementsHandler) Get(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, view)
 }
 
-func (h *AchievementsHandler) UpdateNote(w http.ResponseWriter, r *http.Request) {
+func (h *AchievementsHandler) UpdateMe(w http.ResponseWriter, r *http.Request) {
 	userID := middleware.UserIDFromCtx(r)
-	uaID := r.PathValue("id")
+	typeID := r.PathValue("id")
 
 	var body models.UpdateNoteRequest
 
@@ -104,11 +104,12 @@ func (h *AchievementsHandler) UpdateNote(w http.ResponseWriter, r *http.Request)
 	}
 
 	result, err := h.db.Exec(r.Context(),
-		`UPDATE user_achievements SET personal_note = $1 WHERE id = $2 AND user_id = $3`,
-		body.Note, uaID, userID,
+		`UPDATE user_achievements SET personal_note = $1
+		 WHERE achievement_type_id = $2 AND user_id = $3`,
+		body.Note, typeID, userID,
 	)
 	if err != nil {
-		log.Printf("update note: %v", err)
+		log.Printf("update me: %v", err)
 		writeError(w, "internal error", http.StatusInternalServerError)
 		return
 	}

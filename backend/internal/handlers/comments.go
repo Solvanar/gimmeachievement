@@ -25,7 +25,7 @@ func NewCommentsHandler(db *pgxpool.Pool) *CommentsHandler {
 	return &CommentsHandler{db: db}
 }
 
-func (h *CommentsHandler) ListForType(w http.ResponseWriter, r *http.Request) {
+func (h *CommentsHandler) ListGlobal(w http.ResponseWriter, r *http.Request) {
 	typeID := r.PathValue("id")
 
 	rows, err := h.db.Query(r.Context(), `
@@ -46,7 +46,7 @@ func (h *CommentsHandler) ListForType(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, scanComments(rows))
 }
 
-func (h *CommentsHandler) CreateForType(w http.ResponseWriter, r *http.Request) {
+func (h *CommentsHandler) CreateGlobal(w http.ResponseWriter, r *http.Request) {
 	userID := middleware.UserIDFromCtx(r)
 	typeID := r.PathValue("id")
 
@@ -73,7 +73,7 @@ func (h *CommentsHandler) CreateForType(w http.ResponseWriter, r *http.Request) 
 	writeJSON(w, comment)
 }
 
-func (h *CommentsHandler) ListForUserAchievement(w http.ResponseWriter, r *http.Request) {
+func (h *CommentsHandler) ListPrivate(w http.ResponseWriter, r *http.Request) {
 	uaID := r.PathValue("id")
 
 	rows, err := h.db.Query(r.Context(), `
@@ -94,7 +94,7 @@ func (h *CommentsHandler) ListForUserAchievement(w http.ResponseWriter, r *http.
 	writeJSON(w, scanComments(rows))
 }
 
-func (h *CommentsHandler) CreateForUserAchievement(w http.ResponseWriter, r *http.Request) {
+func (h *CommentsHandler) CreatePrivate(w http.ResponseWriter, r *http.Request) {
 	userID := middleware.UserIDFromCtx(r)
 	uaID := r.PathValue("id")
 

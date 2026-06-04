@@ -5,7 +5,7 @@ import {
 	fetchAchievements,
 	fetchAchievement,
 	activateCode as apiActivateCode,
-	updateNote as apiUpdateNote,
+	updateMe as apiUpdateMe,
 } from '@/services/achievements';
 import { useNotifier } from '@/composables/useNotifier';
 
@@ -78,10 +78,10 @@ export const useAchievementsStore = defineStore('achievements', () => {
 	async function updateNote(achievementId: string, note: string) {
 		const achievement = achievements.value.find((item) => item.id === achievementId);
 
-		if (!achievement?.userAchievementId) return;
+		if (!achievement?.unlocked) return;
 
 		try {
-			await apiUpdateNote(achievement.userAchievementId, note);
+			await apiUpdateMe(achievementId, note);
 			achievement.personalNote = note;
 		} catch (err) {
 			handleError(err);

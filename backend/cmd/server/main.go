@@ -42,16 +42,16 @@ func main() {
 	// Ачивки (требуют авторизации)
 	mux.HandleFunc("GET /api/achievements", requireAuth(achievements.List))
 	mux.HandleFunc("GET /api/achievements/{id}", requireAuth(achievements.Get))
-	mux.HandleFunc("PATCH /api/user-achievements/{id}/note", requireAuth(achievements.UpdateNote))
+	mux.HandleFunc("PATCH /api/achievements/{id}/me", requireAuth(achievements.UpdateMe))
 
-	// Коды пинов (требуют авторизации)
-	mux.HandleFunc("POST /api/codes/activate", requireAuth(codes.Activate))
+	// Активация кода пина (требует авторизации)
+	mux.HandleFunc("POST /api/achievements/activate", requireAuth(codes.Activate))
 
 	// Комментарии (требуют авторизации)
-	mux.HandleFunc("GET /api/achievements/{id}/comments", requireAuth(comments.ListForType))
-	mux.HandleFunc("POST /api/achievements/{id}/comments", requireAuth(comments.CreateForType))
-	mux.HandleFunc("GET /api/user-achievements/{id}/comments", requireAuth(comments.ListForUserAchievement))
-	mux.HandleFunc("POST /api/user-achievements/{id}/comments", requireAuth(comments.CreateForUserAchievement))
+	mux.HandleFunc("GET /api/achievements/{id}/comments/global", requireAuth(comments.ListGlobal))
+	mux.HandleFunc("POST /api/achievements/{id}/comments/global", requireAuth(comments.CreateGlobal))
+	mux.HandleFunc("GET /api/user-achievements/{id}/comments/private", requireAuth(comments.ListPrivate))
+	mux.HandleFunc("POST /api/user-achievements/{id}/comments/private", requireAuth(comments.CreatePrivate))
 
 	port := os.Getenv("PORT")
 	if port == ""  {

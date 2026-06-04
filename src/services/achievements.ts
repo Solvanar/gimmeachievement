@@ -10,38 +10,38 @@ export function fetchAchievement(id: string): Promise<Achievement> {
 }
 
 export function activateCode(code: string): Promise<Achievement> {
-	return apiPost<Achievement>('/api/codes/activate', { code });
+	return apiPost<Achievement>('/api/achievements/activate', { code });
 }
 
-export function updateNote(userAchievementId: string, note: string): Promise<void> {
-	return apiPatch<void>(`/api/user-achievements/${userAchievementId}/note`, { note });
+export function updateMe(achievementTypeId: string, note: string): Promise<void> {
+	return apiPatch<void>(`/api/achievements/${achievementTypeId}/me`, { note });
 }
 
-export function fetchTypeComments(achievementTypeId: string): Promise<AchievementComment[]> {
-	return apiGet<AchievementComment[]>(`/api/achievements/${achievementTypeId}/comments`);
+export function fetchGlobalComments(achievementTypeId: string): Promise<AchievementComment[]> {
+	return apiGet<AchievementComment[]>(`/api/achievements/${achievementTypeId}/comments/global`);
 }
 
-export function fetchPersonalComments(userAchievementId: string): Promise<AchievementComment[]> {
-	return apiGet<AchievementComment[]>(`/api/user-achievements/${userAchievementId}/comments`);
+export function fetchPrivateComments(userAchievementId: string): Promise<AchievementComment[]> {
+	return apiGet<AchievementComment[]>(`/api/user-achievements/${userAchievementId}/comments/private`);
 }
 
-export function createTypeComment(
+export function createGlobalComment(
 	achievementTypeId: string,
 	text: string,
 	replyToId?: string,
 ): Promise<AchievementComment> {
-	return apiPost<AchievementComment>(`/api/achievements/${achievementTypeId}/comments`, {
+	return apiPost<AchievementComment>(`/api/achievements/${achievementTypeId}/comments/global`, {
 		text,
 		replyToId,
 	});
 }
 
-export function createPersonalComment(
+export function createPrivateComment(
 	userAchievementId: string,
 	text: string,
 	replyToId?: string,
 ): Promise<AchievementComment> {
-	return apiPost<AchievementComment>(`/api/user-achievements/${userAchievementId}/comments`, {
+	return apiPost<AchievementComment>(`/api/user-achievements/${userAchievementId}/comments/private`, {
 		text,
 		replyToId,
 	});
