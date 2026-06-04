@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useAchievementsStore } from '@/stores/achievements';
-import { useAchievementToast } from '@/composables/useAchievementToast';
 import { ApiError } from '@/services/api';
 import KeyIcon from '@/assets/icons/key.svg?component';
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg?component';
@@ -9,7 +8,6 @@ import AlertCircleIcon from '@/assets/icons/alert-circle.svg?component';
 import CheckCircleIcon from '@/assets/icons/check-circle.svg?component';
 
 const store = useAchievementsStore();
-const { triggerToast } = useAchievementToast();
 
 const code = ref('');
 const errorMsg = ref('');
@@ -34,7 +32,6 @@ async function submit(event: Event) {
 	try {
 		const achievement = await store.activateCode(formatted);
 		successMsg.value = `Поздравляем! «${achievement.title}» добавлена в профиль!`;
-		triggerToast(achievement);
 		code.value = '';
 	} catch (err) {
 		errorMsg.value =
@@ -147,6 +144,17 @@ async function submit(event: Event) {
 .rc-input-row {
 	display: flex;
 	gap: 8px;
+}
+
+@media (min-width: 640px) {
+	.rc-input-row {
+		flex-direction: column;
+	}
+
+	.rc-submit {
+		width: 100%;
+		justify-content: center;
+	}
 }
 
 .rc-input {

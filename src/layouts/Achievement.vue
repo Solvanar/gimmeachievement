@@ -8,6 +8,8 @@ import AHeader from '@/components/achievement/AHeader.vue';
 import AStory from '@/components/achievement/AStory.vue';
 import AReactions from '@/components/achievement/AReactions.vue';
 import UiSpinner from '@/components/ui/UiSpinner.vue';
+import { useComments } from '@/composables/useComments';
+import { fetchGlobalComments, createGlobalComment } from '@/services/achievements';
 import { THEME_ACCENT_COLORS } from '@/constants/themeAccents';
 
 const props = defineProps<{ id: string }>();
@@ -16,7 +18,15 @@ const router = useRouter();
 
 const achievement = computed(() => store.getById(props.id));
 
-onMounted(() => store.fetchOne(props.id));
+const { comments, load: loadComments, add: addComment } = useComments(
+	() => fetchGlobalComments(props.id),
+	(text, replyToId) => createGlobalComment(props.id, text, replyToId),
+);
+
+onMounted(() => {
+	store.fetchOne(props.id);
+	loadComments();
+});
 </script>
 
 <template>
@@ -50,9 +60,10 @@ onMounted(() => store.fetchOne(props.id));
 			<AStory :achievement="achievement" />
 			<AReactions />
 			<CommentsSection
-				:comments="[]"
+				:comments="comments"
 				:accent-color="THEME_ACCENT_COLORS[achievement.theme] ?? '#10b981'"
 				:theme-type="achievement.theme"
+				@add-comment="addComment"
 			/>
 			<footer class="detail-footer">
 				<span>ЦЕНИТЕ МОМЕНТЫ И СОБИРАЙТЕ СВОЮ КОЛЛЕКЦИЮ ЗНАЧКОВ С КАЖДОЙ ПОБЕДЫ</span>
