@@ -1,21 +1,45 @@
 package handlers
 
 import (
+	"context"
 	"crypto/rand"
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/hex"
+	"errors"
 	"log"
+	"net"
 	"net/http"
 	"time"
 
+	"gimmeachievement/backend/internal/middleware"
 	"gimmeachievement/backend/internal/models"
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"golang.org/x/crypto/bcrypt"
 )
+
+func isUniqueViolation(err error) bool {
+	var pgErr *pgconn.PgError
+
+	return errors.As(err, &pgErr) && pgErr.Code == "23505"
+}
+
+func clientIP(r *http.Request) *string {
+	host, _, err := net.SplitHostPort(r.RemoteAddr)
+	if err != nil {
+		host = r.RemoteAddr
+	}
+
+	if host == "" {
+		return nil
+	}
+
+	return &host
+}
 
 const (
 	accessTokenDuration  = 15 * time.Minute
@@ -70,16 +94,80 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	h.completeAuth(w, r, userID)
+}
+
+func (h *AuthHandler) Register(w http.ResponseWriter, r *http.Request) {
+	var body models.RegisterRequest
+
+	if err := decodeJSON(r, &body); err != nil {
+		writeError(w, "invalid body", http.StatusBadRequest)
+		return
+	}
+
+	if body.Login == "" || body.Password == "" || body.DisplayName == "" {
+		writeError(w, "login, password and display name are required", http.StatusBadRequest)
+		return
+	}
+
+	if len(body.Password) < 6 {
+		writeError(w, "password must be at least 6 characters", http.StatusBadRequest)
+		return
+	}
+
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(body.Password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Printf("auth register hash: %v", err)
+		writeError(w, "internal error", http.StatusInternalServerError)
+		return
+	}
+
+	var userID string
+	err = h.db.QueryRow(r.Context(),
+		`INSERT INTO users (login, password, display_name) VALUES ($1, $2, $3) RETURNING id`,
+		body.Login, string(passwordHash), body.DisplayName,
+	).Scan(&userID)
+
+	if isUniqueViolation(err) {
+		writeError(w, "login already taken", http.StatusConflict)
+		return
+	}
+
+	if err != nil {
+		log.Printf("auth register insert: %v", err)
+		writeError(w, "internal error", http.StatusInternalServerError)
+		return
+	}
+
+	h.completeAuth(w, r, userID)
+}
+
+func (h *AuthHandler) Me(w http.ResponseWriter, r *http.Request) {
+	userID := middleware.UserIDFromCtx(r)
+
+	user, err := h.fetchUser(r.Context(), userID)
+	if err != nil {
+		log.Printf("auth me: %v", err)
+		writeError(w, "internal error", http.StatusInternalServerError)
+		return
+	}
+
+	writeJSON(w, user)
+}
+
+// completeAuth выдаёт токены, ставит refresh-cookie и возвращает юзера.
+// Общая часть для Login и Register.
+func (h *AuthHandler) completeAuth(w http.ResponseWriter, r *http.Request, userID string) {
 	accessToken, err := h.issueAccessToken(userID)
 	if err != nil {
-		log.Printf("auth login access token: %v", err)
+		log.Printf("auth complete access token: %v", err)
 		writeError(w, "internal error", http.StatusInternalServerError)
 		return
 	}
 
 	refreshToken, refreshHash, err := generateRefreshToken()
 	if err != nil {
-		log.Printf("auth login refresh token: %v", err)
+		log.Printf("auth complete refresh token: %v", err)
 		writeError(w, "internal error", http.StatusInternalServerError)
 		return
 	}
@@ -89,16 +177,34 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 	_, err = h.db.Exec(r.Context(),
 		`INSERT INTO refresh_tokens (user_id, token_hash, expires_at, user_agent, ip)
 		 VALUES ($1, $2, $3, $4, $5)`,
-		userID, refreshHash, expiresAt, r.UserAgent(), r.RemoteAddr,
+		userID, refreshHash, expiresAt, r.UserAgent(), clientIP(r),
 	)
 	if err != nil {
-		log.Printf("auth login store refresh token: %v", err)
+		log.Printf("auth complete store refresh token: %v", err)
+		writeError(w, "internal error", http.StatusInternalServerError)
+		return
+	}
+
+	user, err := h.fetchUser(r.Context(), userID)
+	if err != nil {
+		log.Printf("auth complete fetch user: %v", err)
 		writeError(w, "internal error", http.StatusInternalServerError)
 		return
 	}
 
 	setRefreshCookie(w, refreshToken, expiresAt)
-	writeJSON(w, models.TokenResponse{AccessToken: accessToken})
+	writeJSON(w, models.AuthResponse{AccessToken: accessToken, User: user})
+}
+
+func (h *AuthHandler) fetchUser(ctx context.Context, userID string) (models.User, error) {
+	var user models.User
+
+	err := h.db.QueryRow(ctx,
+		`SELECT id, login, display_name, avatar, bio, created_at FROM users WHERE id = $1`,
+		userID,
+	).Scan(&user.ID, &user.Login, &user.DisplayName, &user.Avatar, &user.Bio, &user.CreatedAt)
+
+	return user, err
 }
 
 func (h *AuthHandler) Refresh(w http.ResponseWriter, r *http.Request) {

@@ -1,6 +1,8 @@
 import { request, type RequestOptions } from './request';
 
 export { ApiError, messageForStatus } from './errors';
+export { getAccessToken, setAccessToken } from './authToken';
+export { onSessionExpired } from './session';
 export type { Query, QueryValue, RequestOptions } from './request';
 
 type PublicOptions = Omit<RequestOptions, 'method' | 'body'>;

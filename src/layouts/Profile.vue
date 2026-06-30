@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useAchievementsStore } from '@/stores/achievements';
 import { useProfileStore } from '@/stores/profile';
+import { useAuthStore } from '@/stores/auth';
 import {
 	ACHIEVEMENT_THEMES,
 	ACHIEVEMENT_THEME_LABELS,
@@ -18,8 +20,15 @@ type StatusFilter = 'all' | 'unlocked' | 'locked';
 
 const store = useAchievementsStore();
 const profileStore = useProfileStore();
+const authStore = useAuthStore();
+const router = useRouter();
 
 onMounted(() => store.fetchAll());
+
+async function handleLogout() {
+	await authStore.logout();
+	router.push('/login');
+}
 
 const statusFilter = ref<StatusFilter>('all');
 const themeFilter = ref<FilterValue>('all');
@@ -71,6 +80,7 @@ const themeOptions = computed<Array<{ value: FilterValue; label: string }>>(
 					:profile="profileStore.profile"
 					:level="level"
 					:unlocked-count="store.unlockedCount"
+					@logout="handleLogout"
 				/>
 				<PGamerscore
 					:total-points="store.totalPoints"

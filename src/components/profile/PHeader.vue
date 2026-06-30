@@ -12,6 +12,8 @@ interface Props {
 }
 
 defineProps<Props>();
+
+defineEmits<{ logout: [] }>();
 </script>
 
 <template>
@@ -21,6 +23,9 @@ defineProps<Props>();
 			<div class="banner-glow-1" />
 			<div class="banner-glow-2" />
 			<span class="banner-level-tag">LVL {{ level }} ACHIEVEMENT HUNTER</span>
+			<button class="logout-btn" type="button" @click="$emit('logout')">
+				Выйти
+			</button>
 		</div>
 
 		<div class="profile-body">
@@ -122,6 +127,32 @@ defineProps<Props>();
 	border: 1px solid rgba(245, 158, 11, 0.2);
 	border-radius: 6px;
 	backdrop-filter: blur(6px);
+}
+
+.logout-btn {
+	position: absolute;
+	top: 12px;
+	left: 16px;
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
+	font-weight: var(--font-bold);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-wider);
+	padding: 4px 12px;
+	background: rgba(10, 10, 10, 0.6);
+	color: #d1d5db;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 6px;
+	cursor: pointer;
+	backdrop-filter: blur(6px);
+	transition:
+		color 0.15s ease,
+		border-color 0.15s ease;
+}
+
+.logout-btn:hover {
+	color: #ffffff;
+	border-color: rgba(255, 255, 255, 0.35);
 }
 
 .profile-body {

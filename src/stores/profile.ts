@@ -1,5 +1,9 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { computed } from 'vue';
+import { useAuthStore } from '@/stores/auth';
+import { useAchievementsStore } from '@/stores/achievements';
+import { rankForUnlocked } from '@/constants/ranks';
+import { formatDate } from '@/composables/useFormatDate';
 
 export interface UserProfile {
 	username: string;
@@ -10,18 +14,25 @@ export interface UserProfile {
 	joinDate: string;
 }
 
-const DEFAULT_PROFILE: UserProfile = {
-	username: 'Никита Кодер',
-	gamerTag: 'Nik_Devel_99',
-	avatar:
-		'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=200&h=200',
-	bio: 'Коллекционер редких жизненных ачивок, гик, любитель ретро игр и крепкого эспрессо. Ищу единомышленников!',
-	rank: 'Золотой Искатель',
-	joinDate: 'Июль 2025',
-};
+const FALLBACK_AVATAR =
+	'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=200&h=200';
 
 export const useProfileStore = defineStore('profile', () => {
-	const profile = ref<UserProfile>({ ...DEFAULT_PROFILE });
+	const auth = useAuthStore();
+	const achievements = useAchievementsStore();
+
+	const profile = computed<UserProfile>(() => {
+		const user = auth.user;
+
+		return {
+			username: user?.displayName ?? '',
+			gamerTag: user?.login ?? '',
+			avatar: user?.avatar || FALLBACK_AVATAR,
+			bio: user?.bio ?? '',
+			rank: rankForUnlocked(achievements.unlockedCount),
+			joinDate: user ? formatDate(user.createdAt) : '',
+		};
+	});
 
 	return { profile };
 });
